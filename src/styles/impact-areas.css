@@ -1,0 +1,105 @@
+.impact-areas {
+  padding: 120px 0;
+  background: #e9eff8;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 70px;
+}
+
+.section-header h2 {
+  font-size: 50px;
+  margin-top: 18px;
+}
+
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.impact-card {
+  background: white;
+  padding: 40px 32px;
+  border-radius: 20px;
+  transition: 0.3s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.impact-card:hover {
+  transform: translateY(-8px);
+}
+
+.impact-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 18px;
+  background: rgba(212, 160, 23, 0.12);
+  color: var(--secondary-color);
+  border: 1px solid rgba(212, 160, 23, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  margin-bottom: 24px;
+}
+
+.impact-card h3 {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.impact-card p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.impact-areas .section-tag {
+  background: rgba(212, 160, 23, 0.12);
+
+  color: var(--secondary-color);
+
+  border: 1px solid rgba(212, 160, 23, 0.15);
+}
+
+@media screen and (max-width: 992px) {
+  .impact-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .impact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-header h2 {
+    font-size: 36px;
+  }
+}
+
+
+.section-header h2 {
+  position: relative;
+
+  display: inline-block;
+}
+
+.section-header h2::after {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+  transform: translateX(-50%);
+
+  bottom: -14px;
+
+  width: 80px;
+  height: 4px;
+
+  border-radius: 40px;
+
+  background: var(--secondary-color);
+}

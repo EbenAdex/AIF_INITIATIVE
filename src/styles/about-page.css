@@ -1,0 +1,171 @@
+/* STORY */
+
+.about-story {
+  padding: 120px 0;
+
+  background: linear-gradient(
+    to bottom,
+    #f4f7fb,
+    #edf2f7
+  );
+}
+
+.about-story-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 70px;
+  align-items: center;
+}
+
+.about-story .section-tag,
+.core-values .section-tag {
+  background: rgba(212, 160, 23, 0.12);
+
+  color: var(--secondary-color);
+
+  border: 1px solid rgba(212, 160, 23, 0.15);
+}
+
+.story-image img {
+  width: 100%;
+  height: 700px;
+  object-fit: cover;
+  border-radius: 24px;
+}
+
+.story-content h2 {
+  font-size: 52px;
+  line-height: 1.2;
+  margin: 24px 0;
+}
+
+.story-content p {
+  font-size: 17px;
+  line-height: 1.9;
+  color: var(--text-secondary);
+  margin-bottom: 22px;
+}
+
+/* MISSION */
+
+.mission-vision {
+  padding: 120px 0;
+
+  background: linear-gradient(
+    135deg,
+    #0b3d91,
+    #082d6b
+  );
+}
+
+.mission-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+
+.mission-card {
+  background: rgba(255,255,255,0.08);
+
+  backdrop-filter: blur(12px);
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  padding: 50px 40px;
+
+  border-radius: 24px;
+}
+
+.mission-card h3 {
+  color: var(--secondary-color);
+  font-size: 34px;
+  margin-bottom: 24px;
+}
+
+.mission-card p {
+  color: rgba(255,255,255,0.85);
+  line-height: 1.9;
+}
+
+/* VALUES */
+
+.core-values {
+  padding: 120px 0;
+
+  background: #e9eff8;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+
+.value-card {
+  background: white;
+
+  padding: 40px 30px;
+
+  border-radius: 20px;
+
+  transition: 0.3s ease;
+
+  box-shadow: var(--shadow-sm);
+}
+
+.value-card:hover {
+  transform: translateY(-10px);
+}
+
+.value-card h3 {
+  font-size: 24px;
+  margin-bottom: 18px;
+}
+
+.value-card p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+/* RESPONSIVE */
+
+@media screen and (max-width: 1100px) {
+  .values-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .about-story-container,
+  .mission-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .story-content h2 {
+    font-size: 42px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .values-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .story-content h2 {
+    font-size: 34px;
+  }
+
+  .story-image img {
+    height: 450px;
+  }
+
+  .mission-card {
+    padding: 40px 28px;
+  }
+
+  .mission-card h3 {
+    font-size: 28px;
+  }
+}

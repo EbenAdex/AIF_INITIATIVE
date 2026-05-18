@@ -1,15 +1,37 @@
 .navbar {
   width: 100%;
-  background: rgba(255, 255, 255, 0.97);
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+
   z-index: 1000;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
-  backdrop-filter: blur(10px);
+
+  background: rgba(255,255,255,0.08);
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+
+  transition: all 0.35s ease;
 }
 
+/* SCROLLED NAVBAR */
+
+.navbar.scrolled {
+  background: rgba(10, 25, 47, 0.92);
+
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.12);
+}
+
+/* CONTAINER */
+
 .navbar-container {
-  height: 90px;
+  height: 78px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -20,60 +42,98 @@
 .logo {
   display: flex;
   align-items: center;
+
   gap: 14px;
+
   text-decoration: none;
-  color: inherit;
-  cursor: pointer;
 }
 
 .logo-image {
-  width: 60px;
-  height: 60px;
+  width: 58px;
+  height: 58px;
+
+  flex-shrink: 0;
 }
 
 .logo-image img {
   width: 100%;
   height: 100%;
+
   object-fit: contain;
 }
 
 .logo-text h2 {
   font-size: 22px;
   font-weight: 800;
-  color: var(--text-primary);
+
+  color: white;
+
   line-height: 1.1;
-  letter-spacing: 0.02em;
+
   margin: 0;
 }
 
 .logo-text span {
   display: block;
-  font-size: 13px;
+
+  font-size: 12px;
   font-weight: 600;
-  color: var(--text-secondary);
-  text-transform: uppercase;
+
+  color: rgba(255,255,255,0.75);
+
   letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+
   margin-top: 4px;
 }
 
-/* NAV LINKS */
+/* NAVIGATION */
 
 .nav-links {
   display: flex;
   align-items: center;
+
   gap: 34px;
 }
 
 .nav-links a {
+  position: relative;
+
   font-size: 15px;
   font-weight: 500;
-  color: var(--text-primary);
+
+  color: white;
+
   transition: 0.3s ease;
-  position: relative;
+}
+
+.nav-links a::after {
+  content: "";
+
+  position: absolute;
+
+  bottom: -6px;
+  left: 0;
+
+  width: 0%;
+  height: 2px;
+
+  background: var(--secondary-color);
+
+  transition: 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
 }
 
 .nav-links a:hover {
-  color: var(--primary-color);
+  color: var(--secondary-color);
+}
+
+.nav-links a.active {
+  color: var(--secondary-color);
 }
 
 /* ACTIONS */
@@ -81,105 +141,186 @@
 .nav-actions {
   display: flex;
   align-items: center;
+
   gap: 12px;
 }
 
 .search-btn {
   width: 45px;
   height: 45px;
+
   border-radius: 50%;
-  border: none;
-  background: #f1f3f6;
+
+  border: 1px solid rgba(255,255,255,0.1);
+
+  background: rgba(255,255,255,0.12);
+
+  color: white;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   cursor: pointer;
+
   font-size: 18px;
+
   transition: 0.3s ease;
 }
 
 .search-btn:hover {
   background: var(--primary-color);
-  color: white;
 }
+
+/* BUTTONS */
 
 .volunteer-btn,
 .donate-btn {
-  padding: 12px 22px;
+  height: 46px;
+
+  padding: 0 22px;
+
   border: none;
+
+  border-radius: 8px;
+
   cursor: pointer;
+
+  font-size: 14px;
   font-weight: 600;
-  border-radius: 6px;
+
   transition: 0.3s ease;
 }
 
 .volunteer-btn {
-  background: #4b5563;
+  background: rgba(255,255,255,0.15);
+
+  border: 1px solid rgba(255,255,255,0.1);
+
   color: white;
 }
 
 .volunteer-btn:hover {
-  background: #374151;
+  background: rgba(255,255,255,0.22);
 }
 
 .donate-btn {
   background: var(--secondary-color);
+
   color: white;
 }
 
 .donate-btn:hover {
-  opacity: 0.9;
+  transform: translateY(-2px);
+
+  opacity: 0.95;
 }
 
-/* MOBILE */
+/* MOBILE MENU */
 
 .mobile-menu {
   display: none;
+
+  color: white;
+
   font-size: 30px;
-  color: var(--primary-color);
+
   cursor: pointer;
 }
 
+/* TABLET */
+
 @media screen and (max-width: 1100px) {
+  .navbar-container {
+    position: relative;
+  }
+
   .nav-links {
     position: fixed;
-    top: 90px;
+
+    top: 78px;
     right: -100%;
-    width: 300px;
-    height: calc(100vh - 90px);
-    background: white;
+
+    width: 320px;
+    height: calc(100vh - 78px);
+
+    background: rgba(10, 25, 47, 0.98);
+
+    backdrop-filter: blur(20px);
+
     flex-direction: column;
+
     align-items: flex-start;
-    padding: 40px 24px;
-    gap: 24px;
-    transition: 0.3s ease;
-    box-shadow: -2px 0 10px rgba(0,0,0,0.05);
+
+    padding: 50px 30px;
+
+    gap: 30px;
+
+    transition: 0.35s ease;
+
+    box-shadow:
+      -10px 0 40px rgba(0,0,0,0.18);
   }
 
   .nav-links.active {
     right: 0;
   }
 
-  .nav-actions {
-    display: none;
+  .nav-links a {
+    color: white;
+
+    font-size: 17px;
   }
 
   .mobile-menu {
     display: block;
   }
-}
 
-@media screen and (max-width: 600px) {
-  .logo-text h2 {
-    font-size: 18px;
+  .nav-actions {
+    position: absolute;
+
+    right: 70px;
+
+    gap: 10px;
   }
 
-  .logo-text span {
-    font-size: 11px;
+  .search-btn {
+    display: none;
+  }
+}
+
+/* MOBILE */
+
+@media screen and (max-width: 650px) {
+  .navbar-container {
+    height: 74px;
+  }
+
+  .logo-text {
+    display: none;
   }
 
   .logo-image {
-    width: 50px;
-    height: 50px;
+    width: 52px;
+    height: 52px;
+  }
+
+  .nav-actions {
+    right: 58px;
+
+    gap: 8px;
+  }
+
+  .volunteer-btn,
+  .donate-btn {
+    height: 40px;
+
+    padding: 0 14px;
+
+    font-size: 12px;
+  }
+
+  .nav-links {
+    width: 100%;
   }
 }
