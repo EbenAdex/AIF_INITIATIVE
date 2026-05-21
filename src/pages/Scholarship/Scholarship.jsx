@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import ScholarshipCard from "../../components/scholarship/ScholarshipCard";
 import ScholarshipDetails from "../../components/scholarship/ScholarshipDetails";
@@ -211,3 +212,4 @@ function Scholarship() {
 }
 
 export default Scholarship;
+ 
