@@ -9,25 +9,56 @@
 .scholarship-hero {
   background: linear-gradient(
     135deg,
-    /* rgba(11, 61, 145, 0.95), */ /* rgba(8, 45, 107, 0.95) */
+    rgba(11, 61, 145, 0.98),
+    rgba(212, 160, 23, 0.92)
   );
   color: var(--white);
-  padding: 84px 20px;
+  padding: 100px 20px 84px;
   text-align: center;
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.scholarship-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(255, 255, 255, 0.15),
+      transparent 36%
+    ),
+    radial-gradient(
+      circle at bottom left,
+      rgba(255, 255, 255, 0.08),
+      transparent 30%
+    );
+  pointer-events: none;
+}
+
+.scholarship-hero h1,
+.scholarship-hero p {
+  position: relative;
+  z-index: 1;
 }
 
 .scholarship-hero h1 {
-  font-size: 36px;
-  font-weight: 700;
+  font-size: clamp(2.6rem, 4vw, 4rem);
+  font-weight: 800;
   margin-bottom: 18px;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
 }
 
 .scholarship-hero p {
-  font-size: clamp(1rem, 1.1vw, 1.1rem);
+  font-size: clamp(1rem, 1.1vw, 1.15rem);
   max-width: 660px;
   margin: 0 auto;
-  line-height: 1.8;
+  line-height: 1.85;
   opacity: 0.95;
 }
 
@@ -410,12 +441,37 @@
 .scholarship-cta {
   background: linear-gradient(
     135deg,
-    rgba(11, 61, 145, 0.95),
-    rgba(8, 45, 107, 0.95)
+    rgba(11, 61, 145, 0.98),
+    rgba(212, 160, 23, 0.92)
   );
   color: var(--white);
-  padding: 68px 20px;
+  padding: 48px 20px;
   text-align: center;
+  position: relative;
+}
+
+.scholarship-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(255, 255, 255, 0.15),
+      transparent 36%
+    ),
+    radial-gradient(
+      circle at bottom left,
+      rgba(255, 255, 255, 0.08),
+      transparent 30%
+    );
+  pointer-events: none;
+}
+
+.scholarship-cta h2,
+.scholarship-cta p {
+  position: relative;
+  z-index: 1;
 }
 
 .scholarship-cta h2 {

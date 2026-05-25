@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { HiOutlineMenuAlt3, HiX } from "react-icons/hi";
 import { FiSearch } from "react-icons/fi";
 
@@ -36,12 +36,24 @@ function Navbar() {
 
         {/* NAVIGATION */}
         <nav className={`nav-links ${menuOpen ? "active" : ""}`}>
-          <Link to="/">Home</Link>
-          <Link to="/about">About</Link>
-          <Link to="/scholarship">Scholarship</Link>
-          <Link to="/donors">Donors</Link>
-          <Link to="/events">Events</Link>
-          <Link to="/contact">Contact</Link>
+          <NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}>
+            Home
+          </NavLink>
+          <NavLink to="/about" className={({ isActive }) => (isActive ? "active" : "")}>
+            About
+          </NavLink>
+          <NavLink to="/scholarship" className={({ isActive }) => (isActive ? "active" : "")}>
+            Scholarship
+          </NavLink>
+          <NavLink to="/donors" className={({ isActive }) => (isActive ? "active" : "")}>
+            Donors
+          </NavLink>
+          <NavLink to="/events" className={({ isActive }) => (isActive ? "active" : "")}>
+            Events
+          </NavLink>
+          <NavLink to="/contact" className={({ isActive }) => (isActive ? "active" : "")}>
+            Contact
+          </NavLink>
         </nav>
 
         {/* ACTION BUTTONS */}
@@ -50,9 +62,9 @@ function Navbar() {
             <FiSearch />
           </button>
 
-          <button className="volunteer-btn">
+          <Link to="/scholarship" className="volunteer-btn">
             Apply
-          </button>
+          </Link>
 
           <button className="donate-btn">
             Donate

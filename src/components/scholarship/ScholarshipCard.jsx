@@ -43,11 +43,7 @@ function ScholarshipCard({
       </div>
 
       <div className="scholarship-card-footer">
-        <Button
-          variant="primary"
-          size="md"
-          onClick={() => onApply && onApply(id)}
-        >
+        <Button variant="primary" size="md" onClick={() => onApply && onApply()}>
           Apply Now
         </Button>
       </div>
