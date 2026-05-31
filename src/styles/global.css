@@ -33,6 +33,14 @@ ul {
   list-style: none;
 }
 
+main {
+  padding-top: 90px;
+}
+
+.page-container {
+  padding-top: 90px;
+}
+
 button,
 input,
 textarea {
