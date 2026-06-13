@@ -1,163 +1,120 @@
 import { useState } from "react";
-
 import { useNavigate } from "react-router-dom";
-
-import {
-  FiEye,
-  FiEyeOff,
-} from "react-icons/fi";
-
+import { FiEye, FiEyeOff, FiShield } from "react-icons/fi";
+import { useAuth } from "../../context/AuthContext";
 import "../../styles/auth.css";
 
 function AdminLogin() {
-
-  const [showPassword, setShowPassword] =
-    useState(false);
-
-  const [email, setEmail] =
-    useState("");
-
-  const [password, setPassword] =
-    useState("");
-
+  const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleSubmit = (e) => {
-
     e.preventDefault();
-
-    /* TEMP ADMIN AUTH */
-
-    if (
-      email === "admin@aif.com" &&
-      password === "admin@123"
-    ) {
-
-      const adminUser = {
-        fullname: "AIF Admin",
-        email,
-        role: "admin",
-      };
-
-      localStorage.setItem(
-        "aif_user",
-        JSON.stringify(adminUser)
-      );
-
-      navigate("/admin/dashboard");
-
-    } else {
-
-      alert(
-        "Invalid admin credentials"
-      );
-
-    }
-
+    setLoading(true);
+    setTimeout(() => {
+      if (email === "admin@aif.com" && password === "admin@123") {
+        const adminUser = { fullname: "AIF Admin", email, role: "admin" };
+        localStorage.setItem("aif_user", JSON.stringify(adminUser));
+        login(adminUser);
+        navigate("/admin/dashboard");
+      } else {
+        setError("Invalid admin credentials. Access denied.");
+      }
+      setLoading(false);
+    }, 600);
   };
 
   return (
-    <section className="auth-page">
+    <div className="auth-page">
 
-      <div className="auth-overlay"></div>
+      {/* LEFT BRAND PANEL */}
+      <div className="auth-brand-panel">
+        <div className="brand-top">
+          <div className="brand-logo">
+            <div className="brand-logo-mark">AIF</div>
+            <div className="brand-logo-text">
+              <h2>AIF Initiative</h2>
+              <span>Impact Through Humanity</span>
+            </div>
+          </div>
+          <div className="brand-headline">
+            <h1>Secure <span>Admin</span> Control Center</h1>
+            <p>Manage scholarships, review applications, control platform content, and oversee all operations from one place.</p>
+          </div>
+        </div>
 
-      <div className="auth-container">
+        <div className="brand-features">
+          <div className="brand-feature">
+            <div className="brand-feature-dot" />
+            <span>Full scholarship management</span>
+          </div>
+          <div className="brand-feature">
+            <div className="brand-feature-dot" />
+            <span>Review & approve applications</span>
+          </div>
+          <div className="brand-feature">
+            <div className="brand-feature-dot" />
+            <span>Manage users and events</span>
+          </div>
+        </div>
 
-        <div className="auth-card">
+        <div className="brand-bottom">
+          © {new Date().getFullYear()} AIF Initiative. Admin Portal.
+        </div>
+      </div>
 
-          <div className="auth-badge">
-            Admin Portal
+      {/* RIGHT FORM PANEL */}
+      <div className="auth-form-panel">
+        <div className="auth-form-inner">
+
+          <div className="auth-form-header">
+            <div className="auth-admin-badge">
+              <FiShield /> Admin Portal
+            </div>
+            <h2>Admin Login</h2>
+            <p>Restricted access. Authorised personnel only.</p>
           </div>
 
-          <h2>
-            Admin Login
-          </h2>
+          {error && <div className="auth-error">{error}</div>}
 
-          <p>
-            Login to manage scholarships,
-            applications, users, and
-            platform operations.
-          </p>
-
-          <form
-            className="auth-form"
-            onSubmit={handleSubmit}
-          >
-
+          <form className="auth-form" onSubmit={handleSubmit}>
             <div className="form-group">
-
-              <label>
-                Admin Email
-              </label>
-
-              <input
-                type="email"
-                placeholder="Enter admin email"
-                value={email}
-                onChange={(e) =>
-                  setEmail(e.target.value)
-                }
-              />
-
+              <label>Admin Email</label>
+              <input type="email" placeholder="Enter admin email"
+                value={email} onChange={(e) => { setEmail(e.target.value); setError(""); }} required />
             </div>
 
             <div className="form-group">
-
-              <label>
-                Password
-              </label>
-
-              <div className="password-field">
-
+              <label>Password</label>
+              <div className="password-input">
                 <input
-                  type={
-                    showPassword
-                      ? "text"
-                      : "password"
-                  }
-                  placeholder="Enter password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter admin password"
                   value={password}
-                  onChange={(e) =>
-                    setPassword(e.target.value)
-                  }
+                  onChange={(e) => { setPassword(e.target.value); setError(""); }}
+                  required
                 />
-
-                <button
-                  type="button"
-                  className="password-toggle"
-                  onClick={() =>
-                    setShowPassword(
-                      !showPassword
-                    )
-                  }
-                >
-
-                  {showPassword ? (
-                    <FiEyeOff />
-                  ) : (
-                    <FiEye />
-                  )}
-
+                <button type="button" className="toggle-password"
+                  onClick={() => setShowPassword(!showPassword)}>
+                  {showPassword ? <FiEyeOff /> : <FiEye />}
                 </button>
-
               </div>
-
             </div>
 
-            <button
-              type="submit"
-              className="auth-btn"
-            >
-              Login as Admin
+            <button type="submit" className="auth-btn" disabled={loading}>
+              {loading ? "Authenticating..." : "Login as Admin"}
             </button>
-
           </form>
 
         </div>
-
       </div>
 
-    </section>
+    </div>
   );
 }
 

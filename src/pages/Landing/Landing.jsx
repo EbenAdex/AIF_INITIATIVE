@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { FiArrowRight, FiCheck, FiUsers, FiGlobe, FiTarget } from "react-icons/fi";
 
 import AboutBanner from "../../assets/images/about-image.png";
 import StoryImage from "../../assets/images/story-image.png";
@@ -8,64 +9,136 @@ import "../../styles/landing.css";
 function Landing() {
   return (
     <section className="landing">
-      {/* HERO */}
-
+      {/* HERO SECTION */}
       <div className="landing-hero">
         <div className="landing-overlay"></div>
 
         <div className="container landing-hero-container">
           <div className="landing-left">
             <span className="landing-tag">
-              AIF Humanitarian Initiative
+              Welcome to AIF Initiative
             </span>
 
             <h1>
-              Empowering Communities Through
-              Scholarships, Healthcare &
-              Humanitarian Support
+              Transform Lives Through
+              Education, Healthcare &
+              Humanitarian Impact
             </h1>
 
-            <p>
-              We are committed to creating lasting impact
-              through education, healthcare outreach,
-              humanitarian aid, and community empowerment.
+            <p className="hero-subtitle">
+              Join a global movement dedicated to empowering communities. 
+              Access scholarships, healthcare support, and opportunities 
+              to make a meaningful difference.
             </p>
 
             <div className="landing-buttons">
-              <Link to="/register">
+              <Link to="/register" className="btn-wrapper">
                 <button className="landing-primary-btn">
-                  Join The Initiative
+                  Get Started Today <FiArrowRight size={18} />
                 </button>
               </Link>
 
-              <Link to="/scholarship">
+              <Link to="/scholarship" className="btn-wrapper">
                 <button className="landing-secondary-btn">
-                  Explore Scholarships
+                  Explore Programs
                 </button>
               </Link>
+            </div>
+
+            <div className="hero-features">
+              <div className="feature">
+                <FiCheck size={16} />
+                <span>100% Free Scholarships</span>
+              </div>
+              <div className="feature">
+                <FiCheck size={16} />
+                <span>Healthcare Support</span>
+              </div>
+              <div className="feature">
+                <FiCheck size={16} />
+                <span>Community Programs</span>
+              </div>
             </div>
           </div>
 
           <div className="landing-right">
             <div className="landing-image-card">
-              <img
-                src={AboutBanner}
-                alt="Community Outreach"
-              />
+              <img src={AboutBanner} alt="Community Outreach" />
             </div>
           </div>
         </div>
       </div>
 
-      {/* MISSION SECTION */}
+      {/* STATS SECTION */}
+      <section className="landing-stats">
+        <div className="container">
+          <div className="stats-grid">
+            <div className="stat-item">
+              <h3>5,000+</h3>
+              <p>Lives Positively Impacted</p>
+              <span>Across multiple countries</span>
+            </div>
+            <div className="stat-item">
+              <h3>₦50M+</h3>
+              <p>Scholarships Awarded</p>
+              <span>In educational support</span>
+            </div>
+            <div className="stat-item">
+              <h3>30+</h3>
+              <p>Communities Reached</p>
+              <span>Through our programs</span>
+            </div>
+            <div className="stat-item">
+              <h3>95%</h3>
+              <p>Success Rate</p>
+              <span>Program completion</span>
+            </div>
+          </div>
+        </div>
+      </section>
 
+      {/* IMPACT CTA SECTION */}
+      <section className="landing-cta">
+        <div className="container landing-cta-container">
+          <div className="cta-content">
+            <span className="cta-tag">Together We Can Make A Difference</span>
+
+            <h2>
+              Help Us Create Lasting Impact Across Communities
+            </h2>
+
+            <p>
+              Join AIF Initiative in empowering lives through education, 
+              healthcare support, humanitarian outreach, and sustainable 
+              development programs.
+            </p>
+
+            <div className="cta-buttons">
+              <Link to="/donors">
+                <button className="landing-cta-btn primary">
+                  Donate Now <FiArrowRight size={18} />
+                </button>
+              </Link>
+
+              <Link to="/contact">
+                <button className="landing-cta-btn secondary">
+                  Become A Volunteer
+                </button>
+              </Link>
+            </div>
+          </div>
+
+          <div className="cta-graphic">
+            <div className="cta-box"></div>
+          </div>
+        </div>
+      </section>
+
+      {/* MISSION SECTION */}
       <section className="landing-mission">
         <div className="container mission-container">
           <div className="mission-image">
-            <img
-              src={StoryImage}
-              alt="AIF Mission"
-            />
+            <img src={StoryImage} alt="AIF Mission" />
           </div>
 
           <div className="mission-content">
@@ -74,100 +147,117 @@ function Landing() {
             </span>
 
             <h2>
-              Building Sustainable Impact
-              Across Communities
+              Empowering Futures Through
+              Inclusive Development
             </h2>
 
             <p>
-              AIF Initiative focuses on empowering lives
-              through educational support, healthcare
-              interventions, humanitarian outreach,
-              and sustainable community programs.
+              AIF Initiative is committed to creating sustainable impact through 
+              strategic interventions in education, healthcare, and community development. 
+              We believe every individual deserves the opportunity to reach their full potential.
             </p>
 
-            <div className="mission-stats">
-              <div className="mission-stat">
-                <h3>1000+</h3>
-                <span>Lives Impacted</span>
+            <div className="mission-objectives">
+              <div className="objective">
+                <FiTarget size={24} />
+                <div>
+                  <h4>Educational Excellence</h4>
+                  <p>Providing scholarships and academic support to deserving students</p>
+                </div>
               </div>
-
-              <div className="mission-stat">
-                <h3>20+</h3>
-                <span>Communities Reached</span>
+              <div className="objective">
+                <FiGlobe size={24} />
+                <div>
+                  <h4>Community Development</h4>
+                  <p>Building sustainable programs that strengthen communities</p>
+                </div>
               </div>
-
-              <div className="mission-stat">
-                <h3>15+</h3>
-                <span>Programs Executed</span>
+              <div className="objective">
+                <FiUsers size={24} />
+                <div>
+                  <h4>Healthcare Access</h4>
+                  <p>Ensuring quality healthcare reaches underserved populations</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* SCHOLARSHIP PREVIEW */}
-
+      {/* PROGRAMS SECTION */}
       <section className="landing-scholarships">
         <div className="container">
           <div className="section-header">
             <span className="section-tag">
-              Opportunities
+              Our Programs
             </span>
 
             <h2>
-              Scholarships Designed To
-              Empower The Future
+              Transformative Opportunities
+              For Every Aspiration
             </h2>
+
+            <p>
+              Choose from our diverse range of scholarships and programs tailored 
+              to support your educational and career goals.
+            </p>
           </div>
 
           <div className="landing-scholarship-grid">
             <div className="landing-scholarship-card">
-              <span>Undergraduate Scholarship</span>
-
-              <h3>Full Tuition Support</h3>
-
+              <div className="card-icon">🎓</div>
+              <h3>Full Scholarship Program</h3>
               <p>
-                Financial assistance for outstanding
-                students across multiple disciplines.
+                Comprehensive tuition and living cost support for high-achieving 
+                students pursuing undergraduate and graduate degrees.
               </p>
-
+              <ul className="card-features">
+                <li><FiCheck size={16} /> 100% Tuition Coverage</li>
+                <li><FiCheck size={16} /> Living Allowance</li>
+                <li><FiCheck size={16} /> Mentorship Support</li>
+              </ul>
               <Link to="/register">
-                <button>
-                  Register To Apply
+                <button className="card-btn">
+                  Learn More <FiArrowRight size={16} />
+                </button>
+              </Link>
+            </div>
+
+            <div className="landing-scholarship-card featured">
+              <div className="featured-badge">Most Popular</div>
+              <div className="card-icon">🏥</div>
+              <h3>Healthcare Professional Grant</h3>
+              <p>
+                Specialized support for healthcare students and medical professionals 
+                committed to serving underserved communities.
+              </p>
+              <ul className="card-features">
+                <li><FiCheck size={16} /> 75% Tuition Support</li>
+                <li><FiCheck size={16} /> Internship Placement</li>
+                <li><FiCheck size={16} /> Certification Coverage</li>
+              </ul>
+              <Link to="/register">
+                <button className="card-btn featured-btn">
+                  Learn More <FiArrowRight size={16} />
                 </button>
               </Link>
             </div>
 
             <div className="landing-scholarship-card">
-              <span>Healthcare Grant</span>
-
-              <h3>Medical Support Program</h3>
-
-              <p>
-                Empowering healthcare students and
-                medical outreach initiatives.
-              </p>
-
-              <Link to="/register">
-                <button>
-                  Register To Apply
-                </button>
-              </Link>
-            </div>
-
-            <div className="landing-scholarship-card">
-              <span>Community Development</span>
-
+              <div className="card-icon">🚀</div>
               <h3>Youth Empowerment Fund</h3>
-
               <p>
-                Supporting innovative youth-led
-                community development programs.
+                Supporting innovative youth-led initiatives that drive social 
+                change and community development.
               </p>
-
+              <ul className="card-features">
+                <li><FiCheck size={16} /> Project Funding</li>
+                <li><FiCheck size={16} /> Leadership Training</li>
+                <li><FiCheck size={16} /> Network Access</li>
+              </ul>
               <Link to="/register">
-                <button>
-                  Register To Apply
+                <button className="card-btn">
+                  Learn More <FiArrowRight size={16} />
                 </button>
               </Link>
             </div>
@@ -175,28 +265,36 @@ function Landing() {
         </div>
       </section>
 
-      {/* FINAL CTA */}
-
-      <section className="landing-cta">
-        <div className="container landing-cta-container">
-          <h2>
-            Become Part Of A Movement
-            Focused On Real Impact
-          </h2>
-
-          <p>
-            Register today to access scholarships,
-            community initiatives, and humanitarian
-            opportunities.
-          </p>
-
-          <Link to="/register">
-            <button className="landing-cta-btn">
-              Create Account
-            </button>
-          </Link>
+      {/* WHY CHOOSE US SECTION */}
+      <section className="landing-why-us">
+        <div className="container">
+          <h2>Why Choose AIF Initiative?</h2>
+          <div className="why-grid">
+            <div className="why-item">
+              <div className="why-icon">✓</div>
+              <h4>Transparent Process</h4>
+              <p>Clear application process with timely feedback</p>
+            </div>
+            <div className="why-item">
+              <div className="why-icon">✓</div>
+              <h4>Expert Guidance</h4>
+              <p>Personalized mentorship from industry leaders</p>
+            </div>
+            <div className="why-item">
+              <div className="why-icon">✓</div>
+              <h4>Proven Track Record</h4>
+              <p>Decades of successful program implementations</p>
+            </div>
+            <div className="why-item">
+              <div className="why-icon">✓</div>
+              <h4>Community Network</h4>
+              <p>Connect with thousands of like-minded individuals</p>
+            </div>
+          </div>
         </div>
       </section>
+
+
     </section>
   );
 }

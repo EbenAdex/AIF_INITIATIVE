@@ -509,3 +509,698 @@
     font-size: 28px;
   }
 }
+
+/* ================================================
+   ADD THESE TO THE BOTTOM OF YOUR navbar.css
+   ================================================ */
+
+/* LOGIN / REGISTER BUTTONS */
+
+.nav-login-btn {
+  height: 44px;
+  padding: 0 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.3s ease;
+  text-decoration: none;
+}
+
+.nav-login-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.nav-register-btn {
+  height: 44px;
+  padding: 0 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--secondary-color);
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.3s ease;
+  text-decoration: none;
+  border: none;
+}
+
+.nav-register-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.92;
+}
+
+/* PROFILE MENU */
+
+.profile-menu {
+  position: relative;
+}
+
+.profile-trigger {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 48px;
+  padding: 0 14px 0 6px;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  cursor: pointer;
+  transition: 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.profile-trigger:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.profile-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--secondary-color);
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.profile-name-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  line-height: 1;
+}
+
+.chevron {
+  font-size: 16px;
+  color: rgba(255,255,255,0.7);
+  transition: transform 0.25s ease;
+}
+
+.chevron.open {
+  transform: rotate(180deg);
+}
+
+/* DROPDOWN */
+
+.profile-dropdown {
+  position: absolute;
+  top: 58px;
+  right: 0;
+  width: 260px;
+  background: white;
+  border-radius: 20px;
+  padding: 8px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.14);
+  z-index: 2000;
+  animation: dropFade 0.2s ease;
+}
+
+@keyframes dropFade {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* DROPDOWN USER HEADER */
+
+.dropdown-user-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 12px;
+}
+
+.dropdown-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--secondary-color);
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dropdown-user-header h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 3px;
+}
+
+.dropdown-user-header p {
+  font-size: 12px;
+  color: #9ca3af;
+  margin: 0;
+}
+
+/* DIVIDER */
+
+.dropdown-divider {
+  height: 1px;
+  background: #f1f5f9;
+  margin: 6px 0;
+}
+
+/* DROPDOWN ITEMS */
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 14px;
+  border: none;
+  background: transparent;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background: #f4f7fb;
+  color: #111827;
+}
+
+.dropdown-item svg {
+  font-size: 16px;
+  color: #9ca3af;
+}
+
+.dropdown-item.logout {
+  color: #dc2626;
+}
+
+.dropdown-item.logout svg {
+  color: #dc2626;
+}
+
+.dropdown-item.logout:hover {
+  background: #fee2e2;
+}
+
+/* MOBILE — hide name on small screens */
+
+@media screen and (max-width: 768px) {
+  .profile-name-wrap {
+    display: none;
+  }
+
+  .profile-trigger {
+    padding: 0 10px 0 6px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .nav-login-btn,
+  .nav-register-btn {
+    height: 38px;
+    padding: 0 14px;
+    font-size: 13px;
+  }
+}
+
+/* ================================================
+   ADD THESE TO THE BOTTOM OF YOUR navbar.css
+   ================================================ */
+
+/* LOGIN / REGISTER BUTTONS */
+
+.nav-login-btn {
+  height: 44px;
+  padding: 0 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.3s ease;
+  text-decoration: none;
+}
+
+.nav-login-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.nav-register-btn {
+  height: 44px;
+  padding: 0 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--secondary-color);
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.3s ease;
+  text-decoration: none;
+  border: none;
+}
+
+.nav-register-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.92;
+}
+
+/* PROFILE MENU */
+
+.profile-menu {
+  position: relative;
+}
+
+.profile-trigger {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 48px;
+  padding: 0 14px 0 6px;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  cursor: pointer;
+  transition: 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.profile-trigger:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.profile-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--secondary-color);
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.profile-name-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  line-height: 1;
+}
+
+.chevron {
+  font-size: 16px;
+  color: rgba(255,255,255,0.7);
+  transition: transform 0.25s ease;
+}
+
+.chevron.open {
+  transform: rotate(180deg);
+}
+
+/* DROPDOWN */
+
+.profile-dropdown {
+  position: absolute;
+  top: 58px;
+  right: 0;
+  width: 260px;
+  background: white;
+  border-radius: 20px;
+  padding: 8px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.14);
+  z-index: 2000;
+  animation: dropFade 0.2s ease;
+}
+
+@keyframes dropFade {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* DROPDOWN USER HEADER */
+
+.dropdown-user-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 12px;
+}
+
+.dropdown-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--secondary-color);
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dropdown-user-header h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 3px;
+}
+
+.dropdown-user-header p {
+  font-size: 12px;
+  color: #9ca3af;
+  margin: 0;
+}
+
+/* DIVIDER */
+
+.dropdown-divider {
+  height: 1px;
+  background: #f1f5f9;
+  margin: 6px 0;
+}
+
+/* DROPDOWN ITEMS */
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 14px;
+  border: none;
+  background: transparent;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background: #f4f7fb;
+  color: #111827;
+}
+
+.dropdown-item svg {
+  font-size: 16px;
+  color: #9ca3af;
+}
+
+.dropdown-item.logout {
+  color: #dc2626;
+}
+
+.dropdown-item.logout svg {
+  color: #dc2626;
+}
+
+.dropdown-item.logout:hover {
+  background: #fee2e2;
+}
+
+/* MOBILE — hide name on small screens */
+
+@media screen and (max-width: 768px) {
+  .profile-name-wrap {
+    display: none;
+  }
+
+  .profile-trigger {
+    padding: 0 10px 0 6px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .nav-login-btn,
+  .nav-register-btn {
+    height: 38px;
+    padding: 0 14px;
+    font-size: 13px;
+  }
+}
+
+/* ── NOTIFICATION BELL (navbar) ── */
+
+.notif-wrapper {
+  position: relative;
+}
+
+.notif-bell-btn {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.08);
+  color: white;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.notif-bell-btn:hover { background: rgba(255,255,255,0.16); }
+
+.notif-dot-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #d4a017;
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid transparent;
+}
+
+.notif-dropdown {
+  position: absolute;
+  top: 56px;
+  right: 0;
+  width: 320px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.14);
+  z-index: 2000;
+  overflow: hidden;
+  animation: dropFade 0.2s ease;
+}
+
+.notif-dropdown-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.notif-dropdown-header h4 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #071739;
+  margin: 0;
+  flex: 1;
+}
+
+.notif-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mark-all-read-btn {
+  font-size: 11px;
+  font-weight: 600;
+  color: #2563eb;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: 0.2s ease;
+  white-space: nowrap;
+}
+
+.mark-all-read-btn:hover {
+  background: #eff6ff;
+}
+
+.notif-dropdown-header button {
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 6px;
+  background: #f4f7fb;
+  color: #374151;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.notif-dropdown-header button:hover {
+  background: #e5e7eb;
+}
+
+.notif-dropdown-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.notif-dropdown-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  border-bottom: 1px solid #f8fafc;
+  transition: 0.2s ease;
+}
+
+.notif-dropdown-item:hover { 
+  background: #f8fafc; 
+}
+
+.notif-dropdown-item.unread { 
+  background: #fffbf0; 
+}
+
+.notif-dot-sm {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #d4a017;
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+
+.notif-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.notif-dropdown-item h5 {
+  font-size: 13px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 3px;
+}
+
+.notif-dropdown-item p {
+  font-size: 12px;
+  color: #6b7280;
+  margin: 0 0 3px;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.notif-time {
+  font-size: 11px;
+  color: #9ca3af;
+  display: block;
+}
+
+.notif-action-btn {
+  background: none;
+  border: none;
+  color: #d4a017;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  transition: 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notif-action-btn:hover {
+  color: #b8860b;
+  transform: scale(1.2);
+}
+
+.notif-empty {
+  padding: 40px 20px;
+  text-align: center;
+  color: #9ca3af;
+}
+
+.notif-empty p {
+  margin: 0;
+  font-size: 13px;
+}
+
+/* ADMIN TAG in navbar */
+.admin-tag {
+  font-size: 10px;
+  font-weight: 700;
+  color: #d4a017;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+  line-height: 1;
+}
+
+/* ROLE BADGE in dropdown */
+.dropdown-role-badge {
+  display: inline-block;
+  background: rgba(212,160,23,0.12);
+  color: #d4a017;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 50px;
+  margin-top: 4px;
+}
+
+@media screen and (max-width: 550px) {
+  .notif-dropdown { width: calc(100vw - 32px); right: -80px; }
+}

@@ -9,7 +9,7 @@ import SectionHeader from "../../components/common/SectionHeader";
 
 function About() {
   return (
-    <>
+    <main className="about-page">
       {/* BANNER */}
       <PageBanner
         title="About AIF Initiative"
@@ -163,7 +163,7 @@ function About() {
           </div>
         </div>
       </section>
-    </>
+    </main>
   );
 }
 

@@ -1,7 +1,7 @@
 function Donors() {
 
   return (
-    <section className="section">
+    <section className="donors-page section">
       <div className="container">
         <h1>Donors Page</h1>
       </div>

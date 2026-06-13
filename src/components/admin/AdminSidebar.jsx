@@ -1,12 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import {
-  FiGrid,
-  FiBookOpen,
-  FiFileText,
-  FiUsers,
-  FiCalendar,
-  FiLogOut,
-  FiExternalLink,
+  FiGrid, FiBookOpen, FiFileText,
+  FiUsers, FiCalendar, FiLogOut, FiExternalLink,
 } from "react-icons/fi";
 import { useAuth } from "../../context/AuthContext";
 
@@ -16,7 +11,8 @@ function AdminSidebar() {
 
   const handleLogout = () => {
     logout();
-    navigate("/admin-login");
+    localStorage.removeItem("aif_user");
+    navigate("/admin-login"); // ← always back to admin login
   };
 
   const links = [
@@ -27,9 +23,11 @@ function AdminSidebar() {
     { to: "/admin/events",       icon: <FiCalendar />,  label: "Events" },
   ];
 
+  const initials = user?.fullname
+    ?.split(" ").map(n => n[0]).join("").toUpperCase().slice(0, 2) || "A";
+
   return (
     <aside className="admin-sidebar">
-
       <div className="sidebar-brand">
         <div className="sidebar-logo-mark">AIF</div>
         <div>
@@ -43,9 +41,7 @@ function AdminSidebar() {
           <NavLink
             key={link.to}
             to={link.to}
-            className={({ isActive }) =>
-              `sidebar-link ${isActive ? "active" : ""}`
-            }
+            className={({ isActive }) => `sidebar-link ${isActive ? "active" : ""}`}
           >
             <span className="link-icon">{link.icon}</span>
             <span className="link-label">{link.label}</span>
@@ -55,9 +51,7 @@ function AdminSidebar() {
 
       <div className="sidebar-bottom">
         <div className="sidebar-user">
-          <div className="sidebar-avatar">
-            {user?.fullname?.charAt(0)?.toUpperCase() || "A"}
-          </div>
+          <div className="sidebar-avatar">{initials}</div>
           <div className="sidebar-user-info">
             <h4>{user?.fullname || "AIF Admin"}</h4>
             <span>Super Admin</span>
@@ -74,7 +68,6 @@ function AdminSidebar() {
           <span>Logout</span>
         </button>
       </div>
-
     </aside>
   );
 }

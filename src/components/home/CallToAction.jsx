@@ -1,47 +1,61 @@
 import { Link } from "react-router-dom";
-
-import CTAImage from "../../assets/images/calltoaction.jpg";
+import { FiArrowRight, FiHeart, FiUsers } from "react-icons/fi";
 
 import "../../styles/call-to-action.css";
 
 function CallToAction() {
   return (
-    <section
-      className="cta-section"
-      style={{
-        backgroundImage: `url(${CTAImage})`,
-      }}
-    >
+    <section className="cta-section">
       <div className="cta-overlay"></div>
 
-      <div className="container cta-content">
-        <span>
-          Together We Can Make A Difference
-        </span>
+      <div className="container cta-container">
+        <div className="cta-left">
+          <span className="cta-tag">
+            Together We Can Make A Difference
+          </span>
 
-        <h2>
-          Help Us Create Lasting Impact Across
-          Communities
-        </h2>
+          <h2>
+            Help Us Create Lasting Impact Across Communities
+          </h2>
 
-        <p>
-          Join AIF Initiative in empowering lives through
-          education, healthcare support, humanitarian outreach,
-          and sustainable development programs.
-        </p>
+          <p>
+            Join AIF Initiative in empowering lives through education, 
+            healthcare support, humanitarian outreach, and sustainable 
+            development programs.
+          </p>
 
-        <div className="cta-buttons">
-          <Link to="/donors">
-            <button className="cta-primary-btn">
-              Donate Now
-            </button>
-          </Link>
+          <div className="cta-buttons">
+            <Link to="/donors" className="cta-btn-wrapper">
+              <button className="cta-primary-btn">
+                <FiHeart size={18} />
+                Donate Now
+              </button>
+            </Link>
 
-          <Link to="/contact">
-            <button className="cta-secondary-btn">
-              Become A Volunteer
-            </button>
-          </Link>
+            <Link to="/contact" className="cta-btn-wrapper">
+              <button className="cta-secondary-btn">
+                <FiUsers size={18} />
+                Become A Volunteer
+              </button>
+            </Link>
+          </div>
+        </div>
+
+        <div className="cta-right">
+          <div className="cta-card">
+            <div className="cta-stat">
+              <h3>5,000+</h3>
+              <p>Lives Impacted</p>
+            </div>
+            <div className="cta-stat">
+              <h3>₦50M+</h3>
+              <p>Distributed</p>
+            </div>
+            <div className="cta-stat">
+              <h3>30+</h3>
+              <p>Communities</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
