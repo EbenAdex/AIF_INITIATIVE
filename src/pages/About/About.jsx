@@ -1,9 +1,6 @@
-
 import PageBanner from "../../components/common/PageBanner";
-
 import AboutBanner from "../../assets/images/About-image.png";
 import StoryImage from "../../assets/images/Story-image.png";
-
 import "../../styles/about-page.css";
 import SectionHeader from "../../components/common/SectionHeader";
 
@@ -11,11 +8,13 @@ function About() {
   return (
     <main className="about-page">
       {/* BANNER */}
+      <section className="about-banner">
       <PageBanner
         title="About AIF Initiative"
         subtitle="Building sustainable impact through humanitarian outreach, education, healthcare support, and community development initiatives."
         backgroundImage={AboutBanner}
       />
+      </section>
 
       {/* STORY SECTION */}
       <section className="about-story">

@@ -1,5 +1,11 @@
 /* STORY */
+.about-banner {
+  margin-top:-95px;
+}
 
+.core-values {
+  margin-bottom: -120px;
+}
 .about-story {
   padding: 120px 0;
 

@@ -4,7 +4,7 @@
   --primary-dark: #082d6b;
   --secondary-color: #d4a017;
 
-  --body-bg: #f8f9fc;
+  --body-bg: var(--primary-dark);
   --white: #ffffff;
 
   --text-primary: #1e1e1e;

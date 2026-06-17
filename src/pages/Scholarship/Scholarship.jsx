@@ -6,6 +6,7 @@ import ScholarshipDetails from "../../components/scholarship/ScholarshipDetails"
 import ScholarshipApplicationForm from "../../components/scholarship/ScholarshipApplicationForm";
 import Button from "../../components/common/Button";
 import "../../styles/scholarship.css";
+import CountUpStats from "../../components/common/CountUpStats";
 
 function Scholarship() {
   const [selectedScholarship, setSelectedScholarship] = useState(null);
@@ -132,15 +133,21 @@ function Scholarship() {
             
             <div className="hero-stats">
               <div className="stat">
-                <h3>$2M+</h3>
+               <h3>
+  <CountUpStats end={2000000} suffix="+" />
+</h3>
                 <p>Awarded Annually</p>
               </div>
               <div className="stat">
-                <h3>{scholarships.length}</h3>
+                <h3>
+                  <CountUpStats end={scholarships.length} suffix="+" />
+                </h3>
                 <p>Active Programs</p>
               </div>
               <div className="stat">
-                <h3>500+</h3>
+                <h3>
+                  <CountUpStats end={500} suffix="+" />
+                </h3>
                 <p>Recipients</p>
               </div>
             </div>

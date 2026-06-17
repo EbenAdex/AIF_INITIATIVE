@@ -1,6 +1,7 @@
+
 import { Link } from "react-router-dom";
 import { FiArrowRight, FiHeart, FiUsers } from "react-icons/fi";
-
+import CountUpStats from "../common/CountUpStats";
 import "../../styles/call-to-action.css";
 
 function CallToAction() {
@@ -44,15 +45,21 @@ function CallToAction() {
         <div className="cta-right">
           <div className="cta-card">
             <div className="cta-stat">
-              <h3>5,000+</h3>
+              <h3>
+  <CountUpStats end={5000} suffix="+" />
+</h3>
               <p>Lives Impacted</p>
             </div>
             <div className="cta-stat">
-              <h3>₦50M+</h3>
+              <h3>
+  <CountUpStats end={50000000} suffix="+" />
+</h3>
               <p>Distributed</p>
             </div>
             <div className="cta-stat">
-              <h3>30+</h3>
+              <h3>
+  <CountUpStats end={30} suffix="+" />
+</h3>
               <p>Communities</p>
             </div>
           </div>

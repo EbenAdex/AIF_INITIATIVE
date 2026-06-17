@@ -4,9 +4,12 @@ import {
   FaFacebookF,
   FaTwitter,
   FaYoutube,
+  FaTiktok,
+  FaWhatsapp,
 } from "react-icons/fa";
 
 import "../../styles/footer.css";
+import { Link } from "react-router-dom";
 
 function Footer() {
   const currentYear = new Date().getFullYear();
@@ -50,20 +53,20 @@ function Footer() {
 
           {/* SOCIALS */}
           <div className="footer-socials">
-            <a href="/">
+            <a href="https://www.instagram.com/adesanyaimpactfoundation?igsh=MXRjNXZpY3A2aTZrbQ%3D%3D&utm_source=qr">
               <FaInstagram />
             </a>
 
-            <a href="/">
-              <FaLinkedinIn />
+            <a href="https://www.tiktok.com/@adesanya.impact.f?_r=1&_t=ZS-97IJKn3ZDl2">
+              <FaTiktok />
             </a>
 
             <a href="/">
               <FaFacebookF />
             </a>
 
-            <a href="/">
-              <FaTwitter />
+            <a href="https://wa.me/message/ECQLSIISJASKA1">
+              <FaWhatsapp />
             </a>
 
             <a href="/">
@@ -92,7 +95,7 @@ function Footer() {
             <h3>Get In Touch</h3>
 
             <p>Lagos, Nigeria</p>
-            <p>info@aifinitiative.org</p>
+            <p>adesanyaimpactfoundation@gmail.com</p>
             <p>+234 812 000 0000</p>
           </div>
 
@@ -100,19 +103,19 @@ function Footer() {
           <div className="footer-column">
             <h3>Quick Links</h3>
 
-            <a href="/">Scholarship</a>
+            <a href="/scholarship">Scholarship</a>
             <a href="/">Leadership</a>
-            <a href="/">Events</a>
-            <a href="/">Donors</a>
+            <a href="/events">Events</a>
+            <a href="/donors">Donors</a>
           </div>
 
           {/* COMPANY */}
           <div className="footer-column">
             <h3>Company</h3>
 
-            <a href="/">About Us</a>
-            <a href="/">Meet the Team</a>
-            <a href="/">Contact Us</a>
+            <a href="/about">About Us</a>
+            <Link to="/team">Meet The Team</Link>
+             <a href="/contact">Contact Us</a>
           </div>
         </div>
 

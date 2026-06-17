@@ -6,6 +6,8 @@
 .scholarship-page {
   background: #f8fafc;
   color: var(--text-primary);
+  margin-top: -100px;
+  margin-bottom: -120px;
 }
 
 /* ── HERO SECTION ── */

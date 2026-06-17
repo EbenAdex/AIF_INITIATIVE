@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { FiArrowRight, FiCheck, FiUsers, FiGlobe, FiTarget } from "react-icons/fi";
-
+import CountUpStats from "../../components/common/CountUpStats";
 import AboutBanner from "../../assets/images/about-image.png";
 import StoryImage from "../../assets/images/story-image.png";
 
@@ -74,22 +74,30 @@ function Landing() {
         <div className="container">
           <div className="stats-grid">
             <div className="stat-item">
-              <h3>5,000+</h3>
+              <h3>
+  <CountUpStats end={500} suffix="+" />
+</h3>
               <p>Lives Positively Impacted</p>
               <span>Across multiple countries</span>
             </div>
             <div className="stat-item">
-              <h3>₦50M+</h3>
+              <h3>
+  <CountUpStats end={50000000} suffix="+" />
+</h3>
               <p>Scholarships Awarded</p>
               <span>In educational support</span>
             </div>
             <div className="stat-item">
-              <h3>30+</h3>
+              <h3>
+  <CountUpStats end={30} suffix="+" />
+</h3>
               <p>Communities Reached</p>
               <span>Through our programs</span>
             </div>
             <div className="stat-item">
-              <h3>95%</h3>
+              <h3>
+  <CountUpStats end={95} suffix="%" />
+</h3>
               <p>Success Rate</p>
               <span>Program completion</span>
             </div>
@@ -98,42 +106,56 @@ function Landing() {
       </section>
 
       {/* IMPACT CTA SECTION */}
-      <section className="landing-cta">
-        <div className="container landing-cta-container">
-          <div className="cta-content">
-            <span className="cta-tag">Together We Can Make A Difference</span>
+     <section className="landing-cta">
+  <div className="container">
 
-            <h2>
-              Help Us Create Lasting Impact Across Communities
-            </h2>
+    <span className="cta-tag">
+      Together We Can Make A Difference
+    </span>
 
-            <p>
-              Join AIF Initiative in empowering lives through education, 
-              healthcare support, humanitarian outreach, and sustainable 
-              development programs.
-            </p>
+    <h2 className="cta-title">
+      Help Us Create Lasting Impact Across Communities
+    </h2>
 
-            <div className="cta-buttons">
-              <Link to="/donors">
-                <button className="landing-cta-btn primary">
-                  Donate Now <FiArrowRight size={18} />
-                </button>
-              </Link>
+    <p className="cta-description">
+      Join AIF Initiative in empowering lives through
+      education, healthcare support, humanitarian outreach,
+      and sustainable development programs.
+    </p>
 
-              <Link to="/contact">
-                <button className="landing-cta-btn secondary">
-                  Become A Volunteer
-                </button>
-              </Link>
-            </div>
-          </div>
+    <div className="cta-buttons">
+      <Link to="/donors">
+        <button className="landing-cta-btn primary">
+          Donate Now
+        </button>
+      </Link>
 
-          <div className="cta-graphic">
-            <div className="cta-box"></div>
-          </div>
-        </div>
-      </section>
+      <Link to="/contact">
+        <button className="landing-cta-btn secondary">
+          Become A Volunteer
+        </button>
+      </Link>
+    </div>
 
+    <div className="cta-stats">
+      <div className="cta-stat">
+        <h3>5,000+</h3>
+        <p>Lives Impacted</p>
+      </div>
+
+      <div className="cta-stat">
+        <h3>₦50M+</h3>
+        <p>Distributed</p>
+      </div>
+
+      <div className="cta-stat">
+        <h3>30+</h3>
+        <p>Communities</p>
+      </div>
+    </div>
+
+  </div>
+</section>
       {/* MISSION SECTION */}
       <section className="landing-mission">
         <div className="container mission-container">

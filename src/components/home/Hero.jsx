@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-
+import CountUpStats from "../common/CountUpStats";
 import Hero1 from "../../assets/images/education.jpg";
 import Hero2 from "../../assets/images/healthcare.jpg";
 import Hero3 from "../../assets/images/empowerment.jpg";
@@ -9,7 +9,6 @@ import "../../styles/home.css";
 
 function Hero() {
   const images = [Hero1, Hero2, Hero3];
-
   const [currentImage, setCurrentImage] = useState(0);
 
   useEffect(() => {
@@ -18,7 +17,6 @@ function Hero() {
         prev === images.length - 1 ? 0 : prev + 1
       );
     }, 5000);
-
     return () => clearInterval(slider);
   }, [images.length]);
 
@@ -29,18 +27,13 @@ function Hero() {
         {images.map((image, index) => (
           <div
             key={index}
-            className={`hero-slide ${
-              index === currentImage ? "active" : ""
-            }`}
-            style={{
-              backgroundImage: `url(${image})`,
-            }}
-          ></div>
+            className={`hero-slide ${index === currentImage ? "active" : ""}`}
+            style={{ backgroundImage: `url(${image})` }}
+          />
         ))}
       </div>
 
-      {/* DARK OVERLAY */}
-      <div className="hero-overlay"></div>
+      <div className="hero-overlay" />
 
       {/* CONTENT */}
       <div className="container hero-content">
@@ -54,41 +47,32 @@ function Hero() {
         </h1>
 
         <p>
-          AIF Initiative is committed to creating lasting impact
-          across communities through education, healthcare,
-          empowerment, humanitarian outreach, and sustainable
-          development initiatives.
+          AIF Initiative is committed to creating lasting impact across
+          communities through education, healthcare, empowerment,
+          humanitarian outreach, and sustainable development initiatives.
         </p>
 
-        {/* BUTTONS */}
         <div className="hero-buttons">
           <Link to="/scholarship">
-            <button className="hero-primary-btn">
-              Apply for Scholarship
-            </button>
+            <button className="hero-primary-btn">Apply for Scholarship</button>
           </Link>
-
           <Link to="/about">
-            <button className="hero-secondary-btn">
-              Learn More
-            </button>
+            <button className="hero-secondary-btn">Learn More</button>
           </Link>
         </div>
 
-        {/* STATS */}
+        {/* STATS — number first, label below */}
         <div className="hero-stats">
           <div className="stat-card">
-            <h3>20+</h3>
+            <h3><CountUpStats end={20} suffix="+" /></h3>
             <span>Communities Impacted</span>
           </div>
-
           <div className="stat-card">
-            <h3>5+</h3>
+            <h3><CountUpStats end={10} suffix="+" /></h3>
             <span>Support Initiatives</span>
           </div>
-
           <div className="stat-card">
-            <h3>1000+</h3>
+            <h3><CountUpStats end={1000} suffix="+" /></h3>
             <span>Lives Reached</span>
           </div>
         </div>
