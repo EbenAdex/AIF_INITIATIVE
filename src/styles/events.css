@@ -1,0 +1,305 @@
+/* ==========================================================================
+   EVENTS PAGE
+   Uses global tokens from variables.css (colors, radius, shadow, spacing).
+   ========================================================================== */
+
+.events-page {
+  background: var(--body-bg);
+}
+
+/* ---------------- SEARCH BAR ---------------- */
+
+.events-search {
+  position: relative;
+  max-width: 560px;
+  margin: 0 auto 36px;
+}
+
+.events-search-icon {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+  font-size: 16px;
+}
+
+.events-search input {
+  width: 100%;
+  padding: 16px 20px 16px 50px;
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  background: var(--white);
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.events-search input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(11, 61, 145, 0.08);
+}
+
+/* ---------------- FILTER / TAB CONTROLS ---------------- */
+
+.events-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 48px;
+}
+
+.events-tabs {
+  display: inline-flex;
+  gap: 6px;
+  padding: 6px;
+  background: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  box-shadow: var(--shadow-sm);
+}
+
+.tab-btn {
+  border: none;
+  background: transparent;
+  padding: 10px 22px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+}
+
+.tab-btn.active {
+  background: var(--primary-color);
+  color: var(--white);
+}
+
+.events-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.events-filter label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.events-filter select {
+  padding: 12px 40px 12px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%230B3D91' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 12px;
+}
+
+.events-filter select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+/* ---------------- EVENTS GRID ---------------- */
+
+.events-list-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 32px;
+}
+
+.event-item {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.event-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(11, 61, 145, 0.12);
+}
+
+/* MEDIA */
+
+.event-media {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.event-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition);
+}
+
+.event-item:hover .event-media img {
+  transform: scale(1.05);
+}
+
+.event-date-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--primary-color);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.event-category-pill {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--secondary-color);
+  color: var(--white);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* BODY */
+
+.event-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 14px;
+  padding: 24px;
+}
+
+.event-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.event-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.event-meta svg {
+  color: var(--secondary-color);
+}
+
+.event-body h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.event-body p {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  flex: 1;
+}
+
+.event-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+}
+
+.event-capacity {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.event-capacity svg {
+  color: var(--primary-color);
+}
+
+/* EMPTY STATE */
+
+.events-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+/* ---------------- MODAL FORM PADDING (reuses forms.css shell) ---------------- */
+
+.event-registration-form {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.form-success-message h3 {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+
+@media screen and (max-width: 768px) {
+  .events-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .events-tabs {
+    justify-content: center;
+  }
+
+  .events-filter {
+    justify-content: space-between;
+  }
+
+  .event-registration-form {
+    padding: 24px 20px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .events-list-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tab-btn {
+    flex: 1;
+    padding: 10px 14px;
+  }
+}
