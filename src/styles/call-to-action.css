@@ -1,0 +1,234 @@
+/* ================================================
+   CALL TO ACTION SECTION - Professional Design
+================================================ */
+
+.cta-section {
+  position: relative;
+  padding: 100px 20px;
+  background: linear-gradient(
+    135deg,
+    #071739 0%,
+    #0b3d91 35%,
+    #1e40af 70%,
+    #d4a017 100%
+  );
+  color: white;
+  overflow: hidden;
+  margin-bottom: -120px;
+}
+
+.cta-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(255, 255, 255, 0.1),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at bottom left,
+      rgba(212, 160, 23, 0.15),
+      transparent 40%
+    );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cta-container {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 80px;
+  align-items: center;
+}
+
+/* ── LEFT CONTENT ── */
+.cta-left {
+  max-width: 600px;
+}
+
+.cta-tag {
+  display: inline-block;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  color: #ffd700;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 24px;
+  backdrop-filter: blur(10px);
+}
+
+.cta-left h2 {
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin: 0 0 20px;
+}
+
+.cta-left p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  margin: 0 0 32px;
+  opacity: 0.95;
+}
+
+/* ── BUTTONS ── */
+.cta-buttons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.cta-btn-wrapper {
+  text-decoration: none;
+}
+
+.cta-primary-btn,
+.cta-secondary-btn {
+  padding: 14px 32px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cta-primary-btn {
+  background: linear-gradient(135deg, #ffd700 0%, #d4a017 100%);
+  color: #071739;
+  box-shadow: 0 8px 24px rgba(212, 160, 23, 0.3);
+}
+
+.cta-primary-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(212, 160, 23, 0.4);
+}
+
+.cta-secondary-btn {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+}
+
+.cta-secondary-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* ── RIGHT SIDE STATS ── */
+.cta-right {
+  position: relative;
+}
+
+.cta-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  padding: 40px 32px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+.cta-stat {
+  text-align: center;
+  padding: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cta-stat:last-child {
+  border-bottom: none;
+}
+
+.cta-stat h3 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #ffd700;
+  margin: 0 0 8px;
+}
+
+.cta-stat p {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+  font-weight: 500;
+}
+
+/* ── RESPONSIVE ── */
+@media screen and (max-width: 1024px) {
+  .cta-container {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .cta-right {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .cta-card {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+
+  .cta-stat {
+    padding: 24px 16px;
+    border-bottom: none;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .cta-stat:last-child {
+    border-right: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .cta-section {
+    padding: 60px 20px;
+  }
+
+  .cta-left h2 {
+    font-size: 1.75rem;
+  }
+
+  .cta-left p {
+    font-size: 0.95rem;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+  }
+
+  .cta-primary-btn,
+  .cta-secondary-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .cta-card {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .cta-stat {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px;
+  }
+
+  .cta-stat:last-child {
+    border-bottom: none;
+  }
+}

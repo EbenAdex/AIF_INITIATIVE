@@ -1,31 +1,33 @@
 :root {
   /* COLORS */
-  --primary-color: #0B3D91;
+  --primary-color: #0b3d91;
   --primary-dark: #082d6b;
-  --secondary-color: #D4A017;
+  --secondary-color: #d4a017;
 
-  --body-bg: #F8F9FC;
-  --white: #FFFFFF;
+  --body-bg: var(--primary-dark);
+  --white: #ffffff;
 
-  --text-primary: #1E1E1E;
-  --text-secondary: #6B7280;
+  --text-primary: #1e1e1e;
+  --text-secondary: #6b7280;
 
-  --border-color: #E5E7EB;
+  --border-color: #e5e7eb;
 
   /* TYPOGRAPHY */
   --font-family: "Poppins", sans-serif;
 
-  /* SPACING */
+  /* WIDTH */
   --container-width: 1200px;
-  --section-padding: 80px 20px;
+
+  /* SPACING */
+  --section-padding: 100px 0;
+
+  /* RADIUS */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+
+  /* TRANSITION */
+  --transition: 0.3s ease;
 
   /* SHADOW */
   --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.05);
-
-  /* TRANSITIONS */
-  --transition: 0.3s ease;
-
-  /* BORDER RADIUS */
-  --radius-sm: 8px;
-  --radius-md: 12px;
 }

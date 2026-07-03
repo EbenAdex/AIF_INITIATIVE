@@ -1,0 +1,359 @@
+/* ==========================================================================
+   DONORS PAGE
+   Uses global tokens from variables.css (colors, radius, shadow, spacing).
+   ========================================================================== */
+
+/* ---------------- IMPACT METRICS ---------------- */
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 28px;
+}
+
+.metric-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: 40px 24px;
+  background: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.metric-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(11, 61, 145, 0.12);
+}
+
+.metric-icon {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(11, 61, 145, 0.08);
+  color: var(--primary-color);
+  font-size: 1.5rem;
+}
+
+.metric-value {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  line-height: 1.1;
+}
+
+.metric-label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* ---------------- DONATION CTA BANNER ---------------- */
+
+.donate-banner {
+  background: var(--primary-color);
+  padding: var(--section-padding);
+}
+
+.donate-content {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  align-items: center;
+  gap: 60px;
+}
+
+.donate-intro h2 {
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 18px;
+}
+
+.donate-intro p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.donate-card {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  padding: 36px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
+}
+
+.amount-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.amount-btn {
+  padding: 16px 12px;
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition),
+    color var(--transition);
+}
+
+.amount-btn:hover {
+  border-color: var(--primary-color);
+}
+
+.amount-btn.active {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: var(--white);
+}
+
+.custom-amount {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.custom-amount-symbol {
+  position: absolute;
+  top: 50%;
+  left: 18px;
+  transform: translateY(-50%);
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.custom-amount input {
+  width: 100%;
+  padding: 16px 18px 16px 36px;
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  color: var(--text-primary);
+  transition: border-color var(--transition);
+}
+
+.custom-amount input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.donate-submit {
+  width: 100%;
+}
+
+.donate-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 18px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.donate-note svg {
+  color: var(--secondary-color);
+}
+
+/* ---------------- DONOR WALL ---------------- */
+
+.anonymous-toggle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.anonymous-toggle label {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.anonymous-toggle input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--primary-color);
+  cursor: pointer;
+}
+
+.tier-block {
+  margin-bottom: 64px;
+}
+
+.tier-block:last-child {
+  margin-bottom: 0;
+}
+
+.tier-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+  padding-bottom: 18px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.tier-icon {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 1.3rem;
+}
+
+.tier-header h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.tier-min {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* Tier accent colors — gold/silver convey hierarchy */
+.tier-block--platinum .tier-icon {
+  background: rgba(11, 61, 145, 0.1);
+  color: var(--primary-color);
+}
+
+.tier-block--gold .tier-icon {
+  background: rgba(212, 160, 23, 0.14);
+  color: var(--secondary-color);
+}
+
+.tier-block--silver .tier-icon {
+  background: rgba(107, 114, 128, 0.12);
+  color: var(--text-secondary);
+}
+
+/* CONDITIONAL LAYOUT SIZING
+   Top tier = large prominent cards; base tier = dense compact grid. */
+.donor-grid {
+  display: grid;
+  gap: 20px;
+}
+
+.donor-grid--platinum {
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.donor-grid--gold {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.donor-grid--silver {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.donor-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.donor-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(11, 61, 145, 0.1);
+}
+
+/* Prominent presentation for the top tier */
+.donor-grid--platinum .donor-card {
+  padding: 44px 28px;
+  border-top: 4px solid var(--primary-color);
+}
+
+.donor-grid--platinum .donor-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+/* Mid tier */
+.donor-grid--gold .donor-card {
+  padding: 32px 22px;
+  border-top: 4px solid var(--secondary-color);
+}
+
+.donor-grid--gold .donor-name {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+/* Dense base tier */
+.donor-grid--silver .donor-card {
+  padding: 22px 16px;
+}
+
+.donor-grid--silver .donor-name {
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.donor-name {
+  color: var(--text-primary);
+}
+
+.donor-card--anonymous .donor-name {
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.tier-hidden-note {
+  margin-top: 18px;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+
+@media screen and (max-width: 900px) {
+  .donate-content {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .donate-intro h2 {
+    font-size: 2.1rem;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .amount-options {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .donate-card {
+    padding: 24px;
+  }
+
+  .tier-header h3 {
+    font-size: 1.25rem;
+  }
+}

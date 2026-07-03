@@ -1,0 +1,286 @@
+.team-page {
+  background: #041f57;
+  color: white;
+}
+
+.team-hero {
+  padding: 160px 0 120px;
+  text-align: center;
+  background:
+    linear-gradient(
+      135deg,
+      #041f57,
+      #0b3d91,
+      #d4a017
+    );
+}
+
+.team-tag {
+  color: #d4a017;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.team-hero h1 {
+  font-size: 4rem;
+  margin: 20px 0;
+}
+
+.team-hero h1 span {
+  color: #d4a017;
+}
+
+.team-hero p {
+  max-width: 700px;
+  margin: auto;
+  line-height: 1.8;
+}
+
+.founder-section {
+  padding: 100px 0;
+}
+
+.founder-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.founder-image img {
+  width: 100%;
+  border-radius: 20px;
+}
+
+.section-badge {
+  color: #d4a017;
+  font-weight: 600;
+}
+
+.founder-content h2 {
+  margin: 15px 0;
+}
+
+.team-btn {
+  display: inline-block;
+  margin-top: 25px;
+  background: #d4a017;
+  color: #041f57;
+  padding: 14px 24px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.leadership-section {
+  padding: 100px 0;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 30px;
+}
+
+.team-card {
+  background: rgba(212,160,23,.15);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(212,160,23,.3);
+  border-radius: 20px;
+  padding: 30px;
+  text-align: center;
+}
+
+.team-card img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.team-card span {
+  color: #d4a017;
+}
+
+.volunteer-section {
+  padding: 100px 0;
+}
+
+.volunteer-stats {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 30px;
+}
+
+.volunteer-card {
+  background: rgba(255,255,255,.05);
+  padding: 40px;
+  text-align: center;
+  border-radius: 20px;
+}
+
+.volunteer-card svg {
+  font-size: 2rem;
+  color: #d4a017;
+}
+
+.team-cta {
+  padding: 120px 0;
+  text-align: center;
+  margin-bottom: -120px
+}
+
+.cta-buttons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.cta-primary,
+.cta-secondary {
+  padding: 16px 28px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.cta-primary {
+  background: #d4a017;
+  color: #041f57;
+}
+
+.cta-secondary {
+  border: 1px solid white;
+  color: white;
+}
+
+.team-card {
+  transition: all 0.3s ease;
+}
+
+.team-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.team-card img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #d4a017;
+}
+
+@media (max-width: 992px) {
+
+  .founder-container,
+  .team-grid,
+  .volunteer-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .team-hero h1 {
+    font-size: 2.8rem;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+  }
+}
+
+/* LEADERSHIP */
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(320px,1fr));
+  gap: 30px;
+}
+
+.team-image-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.role-badge {
+  display: inline-block;
+  margin: 15px 0;
+  padding: 8px 18px;
+  background: #d4a017;
+  color: #041f57;
+  border-radius: 30px;
+  font-weight: 700;
+}
+
+/* DEPARTMENTS */
+
+.department-section {
+  padding: 120px 0;
+}
+
+.department-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 30px;
+}
+
+.department-card {
+  background: rgba(212,160,23,.12);
+  border: 1px solid rgba(212,160,23,.25);
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.department-card svg {
+  font-size: 40px;
+  color: #d4a017;
+  margin-bottom: 20px;
+}
+
+.department-card h3 {
+  margin-bottom: 15px;
+}
+
+/* TIMELINE */
+
+.journey-section {
+  padding: 120px 0;
+}
+
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 30px;
+}
+
+.timeline-item {
+  background: rgba(255,255,255,.05);
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.timeline-item h3 {
+  font-size: 2rem;
+  color: #d4a017;
+  margin-bottom: 15px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:992px){
+
+  .department-grid,
+  .timeline {
+    grid-template-columns:1fr;
+  }
+
+}
