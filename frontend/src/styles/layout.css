@@ -1,0 +1,14 @@
+/* ================================================
+   LAYOUT — public website spacing
+   ================================================ */
+
+.website-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  padding-top: 82px; /* accounts for fixed navbar height */
+}
