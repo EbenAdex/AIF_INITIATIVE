@@ -1107,160 +1107,101 @@ tbody td {
   .notif-panel { right: 16px; width: calc(100vw - 32px); }
 }
 
-/* ── QUICK REPORT MODAL ── */
-
-.report-modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
-  animation: fadeIn 0.2s ease;
-}
-
-.report-modal {
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-  max-width: 500px;
-  width: 90%;
-  max-height: 85vh;
-  overflow-y: auto;
-  animation: slideUp 0.3s ease;
-}
-
-.report-modal-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 24px;
-  border-bottom: 1px solid #f1f5f9;
-  background: linear-gradient(135deg, #071739 0%, #0b3d91 100%);
-  color: white;
-}
-
-.report-modal-header h2 {
-  font-size: 20px;
+/* ── DEPARTMENT PILLS (messages/donors) ── */
+.dept-pill {
+  font-size: 11px;
   font-weight: 700;
-  margin: 0;
+  padding: 5px 12px;
+  border-radius: 50px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
 }
 
-.report-modal-header button {
-  width: 36px;
-  height: 36px;
-  border: none;
-  background: rgba(255, 255, 255, 0.2);
+.dept-pill.navy   { background: rgba(7,23,57,0.08);   color: #071739; }
+.dept-pill.gold   { background: rgba(212,160,23,0.12); color: #d4a017; }
+.dept-pill.green  { background: rgba(20,128,60,0.1);   color: #14803c; }
+.dept-pill.purple { background: rgba(124,58,237,0.1);  color: #7c3aed; }
+
+/* ── MESSAGE STATUS BADGES ── */
+.badge.unread  { background: #fff4d6; color: #c28a00; }
+.badge.read    { background: rgba(7,23,57,0.07); color: #071739; }
+.badge.replied { background: #d7f7df; color: #14803c; }
+
+/* ── SIDEBAR BADGE (unread count) ── */
+.sidebar-link {
+  position: relative;
+}
+
+.sidebar-badge {
+  margin-left: auto;
+  background: #d4a017;
   color: white;
-  font-size: 18px;
-  cursor: pointer;
-  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0 5px;
+}
+
+/* ── NEW STAT CARD COLORS ── */
+.stat-card.color-rose .stat-icon { background: #fce7f3; color: #db2777; }
+.stat-card.color-teal .stat-icon { background: #ccfbf1; color: #0d9488; }
+
+/* ── CLICKABLE STAT CARDS ── */
+.stat-card.clickable {
+  cursor: pointer;
+  position: relative;
+}
+
+.stat-arrow {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  color: #d1d5db;
+  font-size: 16px;
+  opacity: 0;
   transition: 0.2s ease;
 }
 
-.report-modal-header button:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-.report-modal-content {
-  padding: 24px;
-}
-
-.report-section {
-  margin-bottom: 28px;
-  padding-bottom: 28px;
-  border-bottom: 1px solid #f1f5f9;
-}
-
-.report-section:last-of-type {
-  border-bottom: none;
-}
-
-.report-section h3 {
-  font-size: 15px;
-  font-weight: 700;
-  color: #071739;
-  margin: 0 0 16px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.report-stat {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 0;
-}
-
-.report-stat span {
-  font-size: 14px;
-  color: #6b7280;
-  font-weight: 500;
-}
-
-.report-stat strong {
-  font-size: 16px;
-  font-weight: 700;
+.stat-card.clickable:hover .stat-arrow {
+  opacity: 1;
   color: #d4a017;
 }
 
-.report-actions {
+/* Make stats grid responsive to 6 cards now */
+@media screen and (min-width: 1300px) {
+  .stats-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+@media screen and (max-width: 1300px) and (min-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ── TOPBAR SEARCH (reused inline in ManageUsers) ── */
+.topbar-search {
   display: flex;
-  gap: 12px;
-  margin-top: 24px;
-  padding-top: 24px;
-  border-top: 1px solid #f1f5f9;
+  align-items: center;
+  gap: 10px;
+  background: #f4f7fb;
+  border-radius: 10px;
+  padding: 0 14px;
 }
 
-.btn-primary,
-.btn-secondary {
-  flex: 1;
-  padding: 10px 16px;
+.topbar-search svg { color: #9ca3af; font-size: 16px; }
+
+.topbar-search input {
   border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 14px;
-  cursor: pointer;
-  transition: 0.2s ease;
-}
-
-.btn-primary {
-  background: #d4a017;
-  color: white;
-}
-
-.btn-primary:hover {
-  background: #b8860b;
-  transform: translateY(-2px);
-}
-
-.btn-secondary {
-  background: #f1f5f9;
-  color: #374151;
-  border: 1px solid #e5e7eb;
-}
-
-.btn-secondary:hover {
-  background: #e5e7eb;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  background: transparent;
+  outline: none;
+  font-size: 13px;
+  width: 100%;
 }

@@ -2,11 +2,14 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useAuth } from "../../context/AuthContext";
+import { useData } from "../../context/DataContext";
 import "../../styles/auth.css";
 
 function Register() {
   const navigate = useNavigate();
   const { login } = useAuth();
+  const { registerUser } = useData();
+
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [error, setError] = useState("");
@@ -42,9 +45,29 @@ function Register() {
         setLoading(false);
         return;
       }
-      const newUser = { fullname: formData.fullname, email: formData.email, password: formData.password, role: "user" };
+
+      // Save credentials for login validation
+      const newUser = {
+        fullname: formData.fullname,
+        email: formData.email,
+        password: formData.password,
+        role: "user",
+      };
       localStorage.setItem("aif_users", JSON.stringify([...existing, newUser]));
-      const sessionUser = { fullname: formData.fullname, email: formData.email, role: "user" };
+
+      // Push into shared DataContext so admin sees it live in Users page
+      registerUser({
+        name: formData.fullname,
+        email: formData.email,
+        role: "user",
+      });
+
+      // Create the active session
+      const sessionUser = {
+        fullname: formData.fullname,
+        email: formData.email,
+        role: "user",
+      };
       localStorage.setItem("aif_user", JSON.stringify(sessionUser));
       login(sessionUser);
       navigate("/home");
