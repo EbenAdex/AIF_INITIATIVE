@@ -1,0 +1,223 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+  SUPER_ADMIN
+}
+
+enum UserStatus {
+  PENDING
+  ACTIVE
+  SUSPENDED
+}
+
+enum ScholarshipStatus {
+  DRAFT
+  ACTIVE
+  CLOSED
+  ARCHIVED
+}
+
+enum ApplicationStatus {
+  PENDING
+  UNDER_REVIEW
+  APPROVED
+  REJECTED
+}
+
+enum NotificationType {
+  SYSTEM
+  APPLICATION
+  SCHOLARSHIP
+  EVENT
+}
+
+model User {
+  id String @id @default(uuid())
+
+  email    String  @unique
+  fullName String
+  phone    String?
+
+  passwordHash String
+
+  role Role @default(USER)
+
+  status UserStatus @default(PENDING)
+
+  emailVerified Boolean @default(false)
+
+  verificationToken       String?
+  verificationTokenExpiry DateTime?
+
+  resetPasswordToken  String?
+  resetPasswordExpiry DateTime?
+
+  refreshTokenHash String?
+
+  profileImage String?
+
+  applications         Application[]
+  reviewedApplications Application[] @relation("ReviewedApplications")
+
+  notifications Notification[]
+
+  auditLogs AuditLog[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@map("users")
+}
+
+model Scholarship {
+  id String @id @default(uuid())
+
+  title       String
+  description String
+
+  amount Decimal @db.Decimal(12, 2)
+
+  currency String @default("USD")
+
+  eligibility String
+
+  category String
+
+  deadline DateTime
+
+  maxApplicants Int?
+
+  status ScholarshipStatus @default(DRAFT)
+
+  applications Application[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@map("scholarships")
+}
+
+model Application {
+  id String @id @default(uuid())
+
+  userId        String
+  scholarshipId String
+
+  statement String @db.Text
+
+  cvUrl         String?
+  transcriptUrl String?
+  passportUrl   String?
+
+  status ApplicationStatus @default(PENDING)
+
+  reviewReason String?
+
+  reviewedById String?
+  reviewedBy   User?   @relation("ReviewedApplications", fields: [reviewedById], references: [id])
+
+  reviewedAt DateTime?
+
+  user User @relation(fields: [userId], references: [id])
+
+  scholarship Scholarship @relation(fields: [scholarshipId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, scholarshipId])
+  @@map("applications")
+}
+
+model Event {
+  id String @id @default(uuid())
+
+  title String
+
+  description String
+
+  location String
+
+  eventDate DateTime
+
+  bannerImage String?
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@map("events")
+}
+
+model DonationCampaign {
+  id String @id @default(uuid())
+
+  title String
+
+  description String
+
+  targetAmount Decimal @db.Decimal(12, 2)
+
+  currentAmount Decimal @default(0) @db.Decimal(12, 2)
+
+  imageUrl String?
+
+  isActive Boolean @default(true)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@map("donation_campaigns")
+}
+
+model Notification {
+  id String @id @default(uuid())
+
+  userId String
+
+  title String
+
+  message String
+
+  type NotificationType
+
+  isRead Boolean @default(false)
+
+  user User @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+
+  @@map("notifications")
+}
+
+model AuditLog {
+  id String @id @default(uuid())
+
+  actorId String
+
+  action String
+
+  entity String
+
+  entityId String
+
+  metadata Json?
+
+  actor User @relation(fields: [actorId], references: [id])
+
+  createdAt DateTime @default(now())
+
+  @@map("audit_logs")
+}
