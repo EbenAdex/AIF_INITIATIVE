@@ -1,9 +1,30 @@
+import { useData } from "../../context/DataContext";
 import { useState } from "react";
 import Button from "../../components/common/Button";
 import "../../styles/contact.css";
 
 function Contact() {
   const [activeFaq, setActiveFaq] = useState(null);
+  const { addMessage } = useData();
+
+
+  const handleSubmit = e => {
+  e.preventDefault();
+ 
+  addMessage({
+    name: form.fullname,
+    email: form.email,
+    phone: form.phone,
+    subject: form.subject,
+    department: form.department,
+    message: form.message,
+  });
+ 
+  setSubmitted(true);
+  setTimeout(() => setSubmitted(false), 4000);
+  setForm({ fullname: "", email: "", phone: "", subject: "", department: "", message: "" });
+};
+ 
 
   const faqs = [
     {

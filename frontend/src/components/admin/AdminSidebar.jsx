@@ -2,25 +2,32 @@ import { NavLink, useNavigate } from "react-router-dom";
 import {
   FiGrid, FiBookOpen, FiFileText,
   FiUsers, FiCalendar, FiLogOut, FiExternalLink,
+  FiHeart, FiMail,
 } from "react-icons/fi";
 import { useAuth } from "../../context/AuthContext";
+import { useData } from "../../context/DataContext";
 
 function AdminSidebar() {
   const { logout, user } = useAuth();
+  const { messages } = useData();
   const navigate = useNavigate();
+
+  const unreadMessages = messages.filter(m => m.status === "Unread").length;
 
   const handleLogout = () => {
     logout();
     localStorage.removeItem("aif_user");
-    navigate("/admin-login"); // ← always back to admin login
+    navigate("/admin-login");
   };
 
   const links = [
     { to: "/admin/dashboard",    icon: <FiGrid />,      label: "Dashboard" },
     { to: "/admin/scholarships", icon: <FiBookOpen />,  label: "Scholarships" },
     { to: "/admin/applications", icon: <FiFileText />,  label: "Applications" },
-    { to: "/admin/users",        icon: <FiUsers />,     label: "Users" },
     { to: "/admin/events",       icon: <FiCalendar />,  label: "Events" },
+    { to: "/admin/donors",       icon: <FiHeart />,     label: "Donors" },
+    { to: "/admin/messages",     icon: <FiMail />,      label: "Messages", badge: unreadMessages },
+    { to: "/admin/users",        icon: <FiUsers />,     label: "Users" },
   ];
 
   const initials = user?.fullname
@@ -45,6 +52,7 @@ function AdminSidebar() {
           >
             <span className="link-icon">{link.icon}</span>
             <span className="link-label">{link.label}</span>
+            {link.badge > 0 && <span className="sidebar-badge">{link.badge}</span>}
           </NavLink>
         ))}
       </nav>

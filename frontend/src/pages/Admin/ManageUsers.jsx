@@ -1,25 +1,17 @@
 import { useState } from "react";
-import { FiTrash2, FiSlash } from "react-icons/fi";
-
-const initial = [
-  { id: 1, name: "Ayo Johnson",  email: "ayo@gmail.com",   role: "user",  joined: "Jan 2026",  status: "Active" },
-  { id: 2, name: "Sarah Nwosu",  email: "sarah@gmail.com",  role: "user",  joined: "Feb 2026",  status: "Active" },
-  { id: 3, name: "David Mark",   email: "david@gmail.com",  role: "user",  joined: "Mar 2026",  status: "Suspended" },
-  { id: 4, name: "Emeka Obi",    email: "emeka@gmail.com",  role: "user",  joined: "Apr 2026",  status: "Active" },
-];
+import { FiTrash2, FiSlash, FiUserCheck, FiSearch } from "react-icons/fi";
+import { useData } from "../../context/DataContext";
 
 function ManageUsers() {
-  const [users, setUsers] = useState(initial);
+  const { users, toggleUserStatus, deleteUser, applications } = useData();
+  const [search, setSearch] = useState("");
 
-  const toggleSuspend = (id) => {
-    setUsers(users.map((u) =>
-      u.id === id ? { ...u, status: u.status === "Active" ? "Suspended" : "Active" } : u
-    ));
-  };
+  const filtered = users.filter(u =>
+    u.name?.toLowerCase().includes(search.toLowerCase()) ||
+    u.email?.toLowerCase().includes(search.toLowerCase())
+  );
 
-  const deleteUser = (id) => {
-    setUsers(users.filter((u) => u.id !== id));
-  };
+  const getApplicationCount = (email) => applications.filter(a => a.email === email).length;
 
   return (
     <div className="admin-page">
@@ -27,13 +19,28 @@ function ManageUsers() {
       <div className="page-header">
         <div>
           <h1>Users</h1>
-          <p>Manage platform users and their access.</p>
+          <p>All registered platform users, live from registrations.</p>
         </div>
+      </div>
+
+      <div className="mini-stats">
+        <div className="mini-stat total"><h3>{users.length}</h3><span>Total Users</span></div>
+        <div className="mini-stat"><h3>{users.filter(u => u.status === "Active").length}</h3><span>Active</span></div>
+        <div className="mini-stat closed"><h3>{users.filter(u => u.status === "Suspended").length}</h3><span>Suspended</span></div>
       </div>
 
       <div className="data-card">
         <div className="data-card-header">
-          <h3>All Users ({users.length})</h3>
+          <h3>All Users ({filtered.length})</h3>
+          <div className="topbar-search" style={{ width: "260px", height: "40px" }}>
+            <FiSearch />
+            <input
+              type="text"
+              placeholder="Search users..."
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+            />
+          </div>
         </div>
 
         <div className="table-wrap">
@@ -42,23 +49,27 @@ function ManageUsers() {
               <tr>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Role</th>
+                <th>Applications</th>
                 <th>Joined</th>
                 <th>Status</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {users.map((u) => (
+              {filtered.length === 0 ? (
+                <tr><td colSpan="6" style={{textAlign:"center", padding:"40px", color:"#9ca3af"}}>
+                  {users.length === 0 ? "No users have registered yet." : "No users match your search."}
+                </td></tr>
+              ) : filtered.map(u => (
                 <tr key={u.id}>
                   <td>
                     <div className="table-user">
-                      <div className="table-avatar">{u.name.charAt(0)}</div>
+                      <div className="table-avatar">{u.name?.charAt(0)}</div>
                       {u.name}
                     </div>
                   </td>
                   <td>{u.email}</td>
-                  <td><span className="badge approved">{u.role}</span></td>
+                  <td>{getApplicationCount(u.email)}</td>
                   <td>{u.joined}</td>
                   <td>
                     <span className={`badge ${u.status === "Active" ? "open" : "closed"}`}>
@@ -67,8 +78,12 @@ function ManageUsers() {
                   </td>
                   <td>
                     <div className="action-group">
-                      <button className="icon-btn edit" onClick={() => toggleSuspend(u.id)} title={u.status === "Active" ? "Suspend" : "Reactivate"}>
-                        <FiSlash />
+                      <button
+                        className="icon-btn edit"
+                        onClick={() => toggleUserStatus(u.id)}
+                        title={u.status === "Active" ? "Suspend" : "Reactivate"}
+                      >
+                        {u.status === "Active" ? <FiSlash /> : <FiUserCheck />}
                       </button>
                       <button className="icon-btn delete" onClick={() => deleteUser(u.id)}>
                         <FiTrash2 />
