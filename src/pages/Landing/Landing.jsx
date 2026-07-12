@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { FiArrowRight, FiCheck, FiUsers, FiGlobe, FiTarget } from "react-icons/fi";
 import CountUpStats from "../../components/common/CountUpStats";
-import AboutBanner from "../../assets/images/About-image.png";
-import StoryImage from "../../assets/images/Story-image.png";
+import AboutBanner from "../../assets/images/about-image.png";
+import StoryImage from "../../assets/images/story-image.png";
 
 import "../../styles/landing.css";
 
