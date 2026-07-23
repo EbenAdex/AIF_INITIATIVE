@@ -1,12 +1,17 @@
-import { Link, useNavigate } from "react-router-dom";
-import { FiEye, FiEyeOff, FiShield } from "react-icons/fi";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import "../../styles/auth.css";
 
 function Login() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { login } = useAuth();
+
+  // Show session-expired message if redirected from auto-logout
+  const sessionExpired = location.state?.sessionExpired;
+
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
@@ -35,6 +40,7 @@ function Login() {
           login(userData);
           navigate("/home");
         } else if (!found) {
+          // Dev fallback — any unregistered email logs in as user
           const userData = { fullname: formData.email.split("@")[0], email: formData.email, role: "user" };
           localStorage.setItem("aif_user", JSON.stringify(userData));
           login(userData);
@@ -67,18 +73,9 @@ function Login() {
         </div>
 
         <div className="brand-features">
-          <div className="brand-feature">
-            <div className="brand-feature-dot" />
-            <span>Apply for scholarships easily</span>
-          </div>
-          <div className="brand-feature">
-            <div className="brand-feature-dot" />
-            <span>Track your application status</span>
-          </div>
-          <div className="brand-feature">
-            <div className="brand-feature-dot" />
-            <span>Access exclusive programs</span>
-          </div>
+          <div className="brand-feature"><div className="brand-feature-dot" /><span>Apply for scholarships easily</span></div>
+          <div className="brand-feature"><div className="brand-feature-dot" /><span>Track your application status</span></div>
+          <div className="brand-feature"><div className="brand-feature-dot" /><span>Access exclusive programs</span></div>
         </div>
 
         <div className="brand-bottom">
@@ -94,6 +91,13 @@ function Login() {
             <h2>Welcome Back</h2>
             <p>Login to access your scholarship dashboard and track your applications.</p>
           </div>
+
+          {/* SESSION EXPIRED NOTICE */}
+          {sessionExpired && (
+            <div className="auth-notice">
+              🔒 You were logged out after 30 minutes of inactivity. Please log in again.
+            </div>
+          )}
 
           {error && <div className="auth-error">{error}</div>}
 

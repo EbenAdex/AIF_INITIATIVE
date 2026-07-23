@@ -7,6 +7,7 @@ import "./styles/utilities.css";
 import "./styles/responsive.css";
 
 import FloatingContact from "./components/common/FloatingContact";
+import Inactivitywarning from "./components/common/Inactivitywarning";
 
 function App() {
   const navigate = useNavigate();
@@ -37,6 +38,7 @@ function App() {
       <AppRoutes />
 
       <FloatingContact />
+       <Inactivitywarning />
     </>
   );
 }

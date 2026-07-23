@@ -31,19 +31,19 @@ function Landing() {
               to make a meaningful difference.
             </p>
 
-            <div className="landing-buttons">
-              <Link to="/register" className="btn-wrapper">
-                <button className="landing-primary-btn">
-                  Get Started Today <FiArrowRight size={18} />
-                </button>
-              </Link>
-
-              <Link to="/scholarship" className="btn-wrapper">
-                <button className="landing-secondary-btn">
-                  Explore Programs
-                </button>
-              </Link>
-            </div>
+           <div className="landing-buttons">
+  <Link to="/login" className="btn-wrapper">
+    <button className="landing-primary-btn">
+      Get Started <FiArrowRight size={18} />
+    </button>
+  </Link>
+ 
+  <Link to="/login" className="btn-wrapper">
+    <button className="landing-secondary-btn">
+      Explore Programs
+    </button>
+  </Link>
+</div>
 
             <div className="hero-features">
               <div className="feature">
@@ -238,7 +238,7 @@ function Landing() {
                 <li><FiCheck size={16} /> Living Allowance</li>
                 <li><FiCheck size={16} /> Mentorship Support</li>
               </ul>
-              <Link to="/register">
+              <Link to="/login">
                 <button className="card-btn">
                   Learn More <FiArrowRight size={16} />
                 </button>
@@ -258,7 +258,7 @@ function Landing() {
                 <li><FiCheck size={16} /> Internship Placement</li>
                 <li><FiCheck size={16} /> Certification Coverage</li>
               </ul>
-              <Link to="/register">
+              <Link to="/login">
                 <button className="card-btn featured-btn">
                   Learn More <FiArrowRight size={16} />
                 </button>
@@ -277,7 +277,7 @@ function Landing() {
                 <li><FiCheck size={16} /> Leadership Training</li>
                 <li><FiCheck size={16} /> Network Access</li>
               </ul>
-              <Link to="/register">
+              <Link to="/login">
                 <button className="card-btn">
                   Learn More <FiArrowRight size={16} />
                 </button>

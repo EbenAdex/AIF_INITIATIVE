@@ -36,10 +36,17 @@ function AppRoutes() {
     <Routes>
 
       {/* ── ALWAYS PUBLIC ── */}
-      <Route path="/" element={<Landing />} />
-      <Route path="/landing" element={<Landing />} />
-      <Route path="/login"           element={user ? <Navigate to="/home" replace /> : <Login />} />
-      <Route path="/register"        element={user ? <Navigate to="/home" replace /> : <Register />} />
+
+      {/* Landing — both new and existing users go to /login from here */}
+      <Route path="/"        element={user ? <Navigate to="/home" replace /> : <Landing />} />
+      <Route path="/landing" element={user ? <Navigate to="/home" replace /> : <Landing />} />
+
+      {/* Login — entry point for ALL users (new + returning) */}
+      <Route path="/login" element={user ? <Navigate to="/home" replace /> : <Login />} />
+
+      {/* Register — still accessible via direct link or login page link */}
+      <Route path="/register" element={user ? <Navigate to="/home" replace /> : <Register />} />
+
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/admin-login"     element={<AdminLogin />} />
 
