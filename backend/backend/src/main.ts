@@ -13,7 +13,10 @@ async function bootstrap() {
   app.use(helmet());
   app.use(compression());
 
-  app.enableCors();
+  app.enableCors({
+    origin: process.env.FRONTEND_URL || true,
+    credentials: true,
+  });
 
   app.useGlobalPipes(
     new ValidationPipe({
@@ -25,17 +28,29 @@ async function bootstrap() {
   app.useGlobalFilters(new HttpExceptionFilter());
   app.useGlobalInterceptors(new ResponseInterceptor());
 
-  app.useGlobalPipes(
-  new ValidationPipe({
-    whitelist: true,
-    transform: true,
-  }),
-);
-
   const config = new DocumentBuilder()
     .setTitle('AIF API')
-    .setDescription('AIF Backend')
+    .setDescription(
+      'Backend API for the AIF Foundation website and administration portal. Public endpoints support scholarships, events, and donation campaigns. Endpoints marked with a bearer token require an authenticated user; administrative endpoints require the ADMIN or SUPER_ADMIN role. Successful responses use the `{ success: true, data }` envelope.',
+    )
     .setVersion('1.0')
+    .addTag('System', 'Service health and operational endpoints')
+    .addTag(
+      'Authentication',
+      'Registration, sessions, email verification, and password recovery',
+    )
+    .addTag('Users', 'Authenticated profile and user administration')
+    .addTag(
+      'Scholarships',
+      'Public scholarship discovery and administrator management',
+    )
+    .addTag('Applications', 'Scholarship submissions and application review')
+    .addTag('Events', 'Public foundation events and administrator management')
+    .addTag(
+      'Donation Campaigns',
+      'Public fundraising campaigns and administrator management',
+    )
+    .addTag('Notifications', 'User notifications and administrator delivery')
     .addBearerAuth()
     .build();
 

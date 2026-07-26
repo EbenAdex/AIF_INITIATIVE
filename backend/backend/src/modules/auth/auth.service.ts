@@ -2,15 +2,15 @@ import {
   Injectable,
   UnauthorizedException,
   BadRequestException,
+  ForbiddenException,
 } from '@nestjs/common';
 
-import { JwtService} from '@nestjs/jwt';
+import { JwtService } from '@nestjs/jwt';
 import * as argon from 'argon2';
 import { MailService } from 'src/modules/mail/mail.service';
 import { randomUUID } from 'crypto';
 import { UserStatus } from '@prisma/client';
 import { PrismaService } from 'prisma/prisma.service';
-
 
 type JwtPayload = {
   sub: string;
@@ -29,36 +29,38 @@ export class AuthService {
   // ---------------------------
   // TOKEN GENERATION
   // ---------------------------
-async signTokens(userId: string, email: string, role: string) {
-  const payload = {
-    sub: userId,
-    email,
-    role,
-  };
+  async signTokens(userId: string, email: string, role: string) {
+    const payload = {
+      sub: userId,
+      email,
+      role,
+    };
 
-  const accessExpiresIn = (process.env.JWT_ACCESS_EXPIRES_IN || '15m') as any;
-  const refreshExpiresIn = (process.env.JWT_REFRESH_EXPIRES_IN || '7d') as any;
+    const accessExpiresIn = (process.env.JWT_ACCESS_EXPIRES_IN || '15m') as any;
+    const refreshExpiresIn = (process.env.JWT_REFRESH_EXPIRES_IN ||
+      '7d') as any;
 
-  const accessToken = await this.jwt.signAsync(payload, {
-    secret: process.env.JWT_ACCESS_SECRET!,
-    expiresIn: accessExpiresIn,
-  });
+    const accessToken = await this.jwt.signAsync(payload, {
+      secret: process.env.JWT_ACCESS_SECRET!,
+      expiresIn: accessExpiresIn,
+    });
 
-  const refreshToken = await this.jwt.signAsync(payload, {
-    secret: process.env.JWT_REFRESH_SECRET!,
-    expiresIn: refreshExpiresIn,
-  });
+    const refreshToken = await this.jwt.signAsync(payload, {
+      secret: process.env.JWT_REFRESH_SECRET!,
+      expiresIn: refreshExpiresIn,
+    });
 
-  return { accessToken, refreshToken };
-}
+    return { accessToken, refreshToken };
+  }
 
   // ---------------------------
   // REGISTER
   // ---------------------------
 
   async register(dto: any) {
+    const email = dto.email.trim().toLowerCase();
     const existing = await this.prisma.user.findUnique({
-      where: { email: dto.email },
+      where: { email },
     });
 
     if (existing) {
@@ -71,7 +73,7 @@ async signTokens(userId: string, email: string, role: string) {
     const user = await this.prisma.user.create({
       data: {
         fullName: dto.fullName,
-        email: dto.email,
+        email,
         phone: dto.phone,
         passwordHash,
         verificationToken,
@@ -79,10 +81,14 @@ async signTokens(userId: string, email: string, role: string) {
       },
     });
 
-    await this.mail.sendVerificationEmail(
-      user.email,
-      verificationToken,
-    );
+    try {
+      await this.mail.sendVerificationEmail(user.email, verificationToken);
+    } catch (error) {
+      await this.prisma.user
+        .delete({ where: { id: user.id } })
+        .catch(() => undefined);
+      throw error;
+    }
 
     return {
       message: 'Registration successful. Verify email.',
@@ -120,29 +126,71 @@ async signTokens(userId: string, email: string, role: string) {
     return { message: 'Email verified successfully' };
   }
 
+  async resendVerification(email: string) {
+    const normalizedEmail = email.trim().toLowerCase();
+    const message =
+      'If this account needs verification, a new email has been sent';
+    const user = await this.prisma.user.findUnique({
+      where: { email: normalizedEmail },
+    });
+
+    if (!user || user.emailVerified || user.deletedAt) {
+      return { message };
+    }
+
+    const verificationToken = randomUUID();
+
+    await this.prisma.user.update({
+      where: { id: user.id },
+      data: {
+        verificationToken,
+        verificationTokenExpiry: new Date(Date.now() + 3600000),
+      },
+    });
+
+    await this.mail.sendVerificationEmail(user.email, verificationToken);
+
+    return { message };
+  }
+
   // ---------------------------
   // LOGIN
   // ---------------------------
 
   async login(dto: any) {
+    const email = dto.email.trim().toLowerCase();
     const user = await this.prisma.user.findUnique({
-      where: { email: dto.email },
+      where: { email },
     });
 
     if (!user) {
       throw new UnauthorizedException('Invalid credentials');
     }
 
-    const passwordMatch = await argon.verify(
-      user.passwordHash,
-      dto.password,
-    );
+    const passwordMatch = await argon.verify(user.passwordHash, dto.password);
 
     if (!passwordMatch) {
       throw new UnauthorizedException('Invalid credentials');
     }
 
-    return this.signTokens(user.id, user.email, user.role);
+    if (!user.emailVerified) {
+      throw new ForbiddenException(
+        'Please verify your email before logging in',
+      );
+    }
+
+    if (user.status !== UserStatus.ACTIVE) {
+      throw new ForbiddenException('Your account is not active');
+    }
+
+    const tokens = await this.signTokens(user.id, user.email, user.role);
+
+    await this.prisma.user.update({
+      where: { id: user.id },
+      data: { refreshTokenHash: await argon.hash(tokens.refreshToken) },
+    });
+
+    return tokens;
   }
 
   // ---------------------------
@@ -177,7 +225,14 @@ async signTokens(userId: string, email: string, role: string) {
       throw new UnauthorizedException('Invalid refresh token');
     }
 
-    return this.signTokens(user.id, user.email, user.role);
+    const tokens = await this.signTokens(user.id, user.email, user.role);
+
+    await this.prisma.user.update({
+      where: { id: user.id },
+      data: { refreshTokenHash: await argon.hash(tokens.refreshToken) },
+    });
+
+    return tokens;
   }
 
   // ---------------------------
