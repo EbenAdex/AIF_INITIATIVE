@@ -81,15 +81,14 @@ export class AuthService {
       },
     });
 
-    try {
-      await this.mail.sendVerificationEmail(user.email, verificationToken);
-    } catch (error) {
-      await this.prisma.user
-        .delete({ where: { id: user.id } })
-        .catch(() => undefined);
-      throw error;
-    }
-
+   try {
+  await this.mail.sendVerificationEmail(
+    user.email,
+    verificationToken,
+  );
+} catch (error) {
+  console.error('Verification email failed:', error);
+}
     return {
       message: 'Registration successful. Verify email.',
     };
