@@ -2,20 +2,18 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useAuth } from "../../context/AuthContext";
-import { useData } from "../../context/DataContext";
 import "../../styles/auth.css";
 
 function Register() {
-  const navigate = useNavigate();
-  const { login } = useAuth();
-  const { registerUser } = useData();
+  const navigate     = useNavigate();
+  const { register } = useAuth();
 
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirm, setShowConfirm] = useState(false);
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [showConfirm,  setShowConfirm]  = useState(false);
+  const [error,        setError]        = useState("");
+  const [loading,      setLoading]      = useState(false);
   const [formData, setFormData] = useState({
-    fullname: "", email: "", password: "", confirmPassword: "",
+    fullName: "", email: "", phone: "", password: "", confirmPassword: "",
   });
 
   const handleChange = (e) => {
@@ -23,61 +21,42 @@ function Register() {
     setError("");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    setError("");
 
     if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match.");
-      setLoading(false);
-      return;
+      setError("Passwords do not match."); return;
     }
     if (formData.password.length < 6) {
-      setError("Password must be at least 6 characters.");
-      setLoading(false);
+      setError("Password must be at least 6 characters."); return;
+    }
+    // Password strength check — must have uppercase, lowercase, number
+    if (!/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).+$/.test(formData.password)) {
+      setError("Password must contain at least one uppercase letter, one lowercase letter, and one number.");
       return;
     }
 
-    setTimeout(() => {
-      const existing = JSON.parse(localStorage.getItem("aif_users") || "[]");
-      if (existing.find(u => u.email === formData.email)) {
-        setError("An account with this email already exists.");
-        setLoading(false);
-        return;
-      }
-
-      // Save credentials for login validation
-      const newUser = {
-        fullname: formData.fullname,
-        email: formData.email,
+    setLoading(true);
+    try {
+      await register({
+        fullName: formData.fullName,
+        email:    formData.email,
+        phone:    formData.phone,
         password: formData.password,
-        role: "user",
-      };
-      localStorage.setItem("aif_users", JSON.stringify([...existing, newUser]));
-
-      // Push into shared DataContext so admin sees it live in Users page
-      registerUser({
-        name: formData.fullname,
-        email: formData.email,
-        role: "user",
       });
-
-      // Create the active session
-      const sessionUser = {
-        fullname: formData.fullname,
-        email: formData.email,
-        role: "user",
-      };
-      localStorage.setItem("aif_user", JSON.stringify(sessionUser));
-      login(sessionUser);
       navigate("/home");
-    }, 600);
+    } catch (err) {
+      const msgs = err.response?.data?.error?.message;
+      if (Array.isArray(msgs)) setError(msgs.join(" "));
+      else setError(err.response?.data?.message || "Registration failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="auth-page">
-
-      {/* LEFT BRAND PANEL */}
       <div className="auth-brand-panel">
         <div className="brand-top">
           <div className="brand-logo">
@@ -92,31 +71,16 @@ function Register() {
             <p>Register today to access life-changing scholarships, healthcare programs, and humanitarian support.</p>
           </div>
         </div>
-
         <div className="brand-features">
-          <div className="brand-feature">
-            <div className="brand-feature-dot" />
-            <span>Free to register and apply</span>
-          </div>
-          <div className="brand-feature">
-            <div className="brand-feature-dot" />
-            <span>Access multiple scholarships</span>
-          </div>
-          <div className="brand-feature">
-            <div className="brand-feature-dot" />
-            <span>Real-time application updates</span>
-          </div>
+          <div className="brand-feature"><div className="brand-feature-dot" /><span>Free to register and apply</span></div>
+          <div className="brand-feature"><div className="brand-feature-dot" /><span>Access multiple scholarships</span></div>
+          <div className="brand-feature"><div className="brand-feature-dot" /><span>Real-time application updates</span></div>
         </div>
-
-        <div className="brand-bottom">
-          © {new Date().getFullYear()} AIF Initiative. All rights reserved.
-        </div>
+        <div className="brand-bottom">© {new Date().getFullYear()} AIF Initiative. All rights reserved.</div>
       </div>
 
-      {/* RIGHT FORM PANEL */}
       <div className="auth-form-panel">
         <div className="auth-form-inner">
-
           <div className="auth-form-header">
             <h2>Create Account</h2>
             <p>Join AIF Initiative to access scholarships, humanitarian programs and community support.</p>
@@ -125,10 +89,11 @@ function Register() {
           {error && <div className="auth-error">{error}</div>}
 
           <form className="auth-form" onSubmit={handleSubmit}>
+
             <div className="form-group">
               <label>Full Name</label>
-              <input type="text" name="fullname" placeholder="Enter your full name"
-                value={formData.fullname} onChange={handleChange} required />
+              <input type="text" name="fullName" placeholder="Enter your full name"
+                value={formData.fullName} onChange={handleChange} required />
             </div>
 
             <div className="form-group">
@@ -138,10 +103,16 @@ function Register() {
             </div>
 
             <div className="form-group">
+              <label>Phone Number</label>
+              <input type="tel" name="phone" placeholder="+234 800 000 0000"
+                value={formData.phone} onChange={handleChange} required />
+            </div>
+
+            <div className="form-group">
               <label>Password</label>
               <div className="password-input">
                 <input type={showPassword ? "text" : "password"} name="password"
-                  placeholder="Create a password (min. 6 characters)"
+                  placeholder="Min. 6 chars, uppercase, lowercase & number"
                   value={formData.password} onChange={handleChange} required />
                 <button type="button" className="toggle-password"
                   onClick={() => setShowPassword(!showPassword)}>
@@ -172,10 +143,8 @@ function Register() {
             <span>Already have an account?</span>
             <Link to="/login">Login</Link>
           </div>
-
         </div>
       </div>
-
     </div>
   );
 }
