@@ -14,7 +14,11 @@ async function bootstrap() {
   app.use(compression());
 
   app.enableCors({
-    origin: process.env.FRONTEND_URL || true,
+     origin: [
+    'https://aif-initiative.vercel.app',
+    'http://localhost:3000',
+    'https://aif-initiative.onrender.com',
+  ],
     credentials: true,
   });
 
@@ -34,6 +38,10 @@ async function bootstrap() {
       'Backend API for the AIF Foundation website and administration portal. Public endpoints support scholarships, events, and donation campaigns. Endpoints marked with a bearer token require an authenticated user; administrative endpoints require the ADMIN or SUPER_ADMIN role. Successful responses use the `{ success: true, data }` envelope.',
     )
     .setVersion('1.0')
+      .addServer(
+    'https://aif-initiative.onrender.com',
+    'Production API',
+  )
     .addTag('System', 'Service health and operational endpoints')
     .addTag(
       'Authentication',
