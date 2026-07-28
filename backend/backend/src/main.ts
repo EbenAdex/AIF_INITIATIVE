@@ -17,7 +17,9 @@ async function bootstrap() {
      origin: [
     'https://aif-initiative.vercel.app',
     'http://localhost:3000',
+    'http://localhost:5173',
     'https://aif-initiative.onrender.com',
+    'https://aif-initiative-spx3.vercel.app',
   ],
     credentials: true,
   });
