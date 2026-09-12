@@ -24,7 +24,9 @@ export function DataProvider({ children }) {
   const [events,         setEvents]         = useState([]);
   const [applications,   setApplications]   = useState([]);
   const [campaigns,      setCampaigns]      = useState([]);
+  const [donors,         setDonors]         = useState([]);
   const [notifications,  setNotifications]  = useState([]);
+  const [messages,       setMessages]       = useState([]); // always defined
   const [unreadCount,    setUnreadCount]     = useState(0);
   const [users,          setUsers]          = useState([]);
   const [loading,        setLoading]        = useState(false);
@@ -74,9 +76,19 @@ export function DataProvider({ children }) {
         campaignService.getAllAdmin(),
         notificationService.getAll(),
       ]);
+      const adminCampaigns = unwrap(campRes);
       setApplications(unwrap(appRes));
       setUsers(unwrap(userRes));
-      setCampaigns(unwrap(campRes));
+      setCampaigns(adminCampaigns);
+      setDonors((Array.isArray(adminCampaigns) ? adminCampaigns : []).map((item, index) => ({
+        id: item.id ?? index + 1,
+        name: item.name || item.title || "Anonymous Donor",
+        type: item.type || "Individual",
+        amount: item.amount || item.targetAmount || "₦0",
+        email: item.email || "",
+        status: item.status || "Active",
+        date: item.date || item.createdAt || new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
+      })));
       setNotifications(unwrap(notifRes));
     } catch (err) {
       console.error("Admin data fetch error:", err);
@@ -140,6 +152,23 @@ export function DataProvider({ children }) {
     setApplications(prev => prev.filter(a => a.id !== id));
   };
 
+  // ── DONOR CRUD ──
+  const addDonor = async (data) => {
+    const donor = {
+      id: Date.now(),
+      ...data,
+      date: data.date || new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
+    };
+    setDonors(prev => [donor, ...prev]);
+    return donor;
+  };
+  const updateDonor = async (id, data) => {
+    setDonors(prev => prev.map(d => d.id === id ? { ...d, ...data } : d));
+  };
+  const deleteDonor = async (id) => {
+    setDonors(prev => prev.filter(d => d.id !== id));
+  };
+
   // ── CAMPAIGN CRUD ──
   const addCampaign = async (data) => {
     const res = await campaignService.create(data);
@@ -169,8 +198,8 @@ export function DataProvider({ children }) {
   return (
     <DataContext.Provider value={{
       // State
-      scholarships, events, applications, campaigns,
-      notifications, unreadCount, users,
+      scholarships, events, applications, campaigns, donors,
+      messages, notifications, unreadCount, users,
       loading, error,
       // Refreshers
       fetchPublicData, fetchUserData, fetchAdminData,
@@ -180,7 +209,8 @@ export function DataProvider({ children }) {
       addEvent, updateEvent, deleteEvent,
       // Applications
       addApplication, updateApplicationStatus, deleteApplication,
-      // Campaigns (Donors)
+      // Donors / Campaigns
+      addDonor, updateDonor, deleteDonor,
       addCampaign, updateCampaign, deleteCampaign,
       // Notifications
       markNotifRead, markAllNotifsRead,

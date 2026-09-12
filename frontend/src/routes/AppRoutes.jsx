@@ -1,33 +1,34 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
-import WebsiteLayout from "../layouts/WebsiteLayout";
-import AdminLayout from "../layouts/AdminLayout";
+import WebsiteLayout  from "../layouts/WebsiteLayout";
+import AdminLayout    from "../layouts/AdminLayout";
 import ProtectedRoute from "../components/protected/ProtectedRoute";
 
-import Landing from "../pages/Landing/Landing";
-import Login from "../pages/Auth/Login";
-import Register from "../pages/Auth/Register";
+import Landing        from "../pages/Landing/Landing";
+import Login          from "../pages/Auth/Login";
+import Register       from "../pages/Auth/Register";
+import VerifyEmail    from "../pages/Auth/VerifyEmail";
 import ForgotPassword from "../pages/Auth/ForgotPassword";
-import AdminLogin from "../pages/Auth/AdminLogin";
+import AdminLogin     from "../pages/Auth/AdminLogin";
 
-import Home from "../pages/Home/Home";
-import About from "../pages/About/About";
+import Home       from "../pages/Home/Home";
+import About      from "../pages/About/About";
 import Scholarship from "../pages/Scholarship/Scholarship";
-import Events from "../pages/Events/Events";
-import Contact from "../pages/Contact/Contact";
-import Donors from "../pages/Donors/Donors";
-import Team from "../pages/Team/Team";
+import Events     from "../pages/Events/Events";
+import Contact    from "../pages/Contact/Contact";
+import Donors     from "../pages/Donors/Donors";
+import Team       from "../pages/Team/Team";
 
 import Dashboard from "../pages/Dashboard/Dashboard";
 
-import AdminDashboard from "../pages/Admin/AdminDashboard";
+import AdminDashboard    from "../pages/Admin/AdminDashboard";
 import ManageScholarships from "../pages/Admin/ManageScholarships";
 import ManageApplications from "../pages/Admin/ManageApplications";
-import ManageUsers from "../pages/Admin/ManageUsers";
-import ManageEvents from "../pages/Admin/ManageEvents";
-import ManageDonors from "../pages/Admin/ManageDonors";
-import ManageMessages from "../pages/Admin/ManageMessages";
+import ManageUsers       from "../pages/Admin/ManageUsers";
+import ManageEvents      from "../pages/Admin/ManageEvents";
+import ManageDonors      from "../pages/Admin/ManageDonors";
+import ManageMessages    from "../pages/Admin/ManageMessages";
 
 function AppRoutes() {
   const { user } = useAuth();
@@ -35,18 +36,14 @@ function AppRoutes() {
   return (
     <Routes>
 
-      {/* ── ALWAYS PUBLIC ── */}
-
-      {/* Landing — both new and existing users go to /login from here */}
+      {/* ── PUBLIC ── */}
       <Route path="/"        element={user ? <Navigate to="/home" replace /> : <Landing />} />
       <Route path="/landing" element={user ? <Navigate to="/home" replace /> : <Landing />} />
-
-      {/* Login — entry point for ALL users (new + returning) */}
-      <Route path="/login" element={user ? <Navigate to="/home" replace /> : <Login />} />
-
-      {/* Register — still accessible via direct link or login page link */}
+      <Route path="/login"   element={user ? <Navigate to="/home" replace /> : <Login />} />
       <Route path="/register" element={user ? <Navigate to="/home" replace /> : <Register />} />
 
+      {/* Verify email — always accessible */}
+      <Route path="/verify-email"    element={<VerifyEmail />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/admin-login"     element={<AdminLogin />} />
 
@@ -64,7 +61,7 @@ function AppRoutes() {
       {/* ── USER DASHBOARD ── */}
       <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
 
-      {/* ── ADMIN (admin role only) ── */}
+      {/* ── ADMIN ── */}
       <Route element={<AdminLayout />}>
         <Route path="/admin/dashboard"    element={<ProtectedRoute adminOnly><AdminDashboard /></ProtectedRoute>} />
         <Route path="/admin/scholarships" element={<ProtectedRoute adminOnly><ManageScholarships /></ProtectedRoute>} />

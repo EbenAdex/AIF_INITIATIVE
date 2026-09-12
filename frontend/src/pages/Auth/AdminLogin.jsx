@@ -13,20 +13,19 @@ function AdminLogin() {
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
-      if (email === "admin@aif.com" && password === "admin@123") {
-        const adminUser = { fullname: "AIF Admin", email, role: "admin" };
-        localStorage.setItem("aif_user", JSON.stringify(adminUser));
-        login(adminUser);
-        navigate("/admin/dashboard");
-      } else {
-        setError("Invalid admin credentials. Access denied.");
-      }
+    setError("");
+
+    try {
+      await login({ email, password });
+      navigate("/admin/dashboard");
+    } catch (err) {
+      setError(err?.response?.data?.message || err?.message || "Invalid admin credentials. Access denied.");
+    } finally {
       setLoading(false);
-    }, 600);
+    }
   };
 
   return (

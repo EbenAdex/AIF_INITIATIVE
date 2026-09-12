@@ -16,7 +16,7 @@ const initialNotifications = [
 ];
 
 function AdminDashboard() {
-  const { scholarships, events, applications, donors, messages, users } = useData();
+  const { scholarships = [], events = [], applications = [], donors = [], messages = [], users = [] } = useData();
   const { user } = useAuth();
   const navigate = useNavigate();
 

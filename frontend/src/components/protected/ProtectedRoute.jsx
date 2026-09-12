@@ -1,21 +1,23 @@
 import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
-// Pages that are always public (no auth needed)
-const PUBLIC_PATHS = ["/", "/login", "/register", "/forgot-password", "/admin-login"];
-
 function ProtectedRoute({ children, adminOnly = false }) {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const location = useLocation();
 
-  // Not logged in — redirect to landing page
+  // Still restoring session — don't redirect yet
+  if (loading) return null;
+
+  // Not logged in
   if (!user) {
     return <Navigate to="/" replace state={{ from: location }} />;
   }
 
-  // Logged in but trying to access admin-only route
-  if (adminOnly && user.role !== "admin") {
-    return <Navigate to="/home" replace />;
+  // Admin-only route — check both "admin" (local) and "ADMIN"/"SUPER_ADMIN" (backend)
+  if (adminOnly) {
+    const role = user.role?.toLowerCase();
+    const isAdmin = role === "admin" || role === "super_admin";
+    if (!isAdmin) return <Navigate to="/home" replace />;
   }
 
   return children;

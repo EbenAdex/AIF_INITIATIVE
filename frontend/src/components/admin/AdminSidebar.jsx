@@ -1,22 +1,24 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import {
   FiGrid, FiBookOpen, FiFileText,
-  FiUsers, FiCalendar, FiLogOut, FiExternalLink,
-  FiHeart, FiMail,
+  FiUsers, FiCalendar, FiLogOut,
+  FiExternalLink, FiHeart, FiMail,
 } from "react-icons/fi";
 import { useAuth } from "../../context/AuthContext";
 import { useData } from "../../context/DataContext";
 
 function AdminSidebar() {
   const { logout, user } = useAuth();
-  const { messages } = useData();
+  const data = useData();
   const navigate = useNavigate();
 
-  const unreadMessages = messages.filter(m => m.status === "Unread").length;
+  // Safe fallback — messages may be undefined while DataContext loads
+  const unreadMessages = Array.isArray(data?.messages)
+    ? data.messages.filter(m => m.status === "Unread").length
+    : 0;
 
-  const handleLogout = () => {
-    logout();
-    localStorage.removeItem("aif_user");
+  const handleLogout = async () => {
+    await logout();
     navigate("/admin-login");
   };
 
@@ -30,8 +32,9 @@ function AdminSidebar() {
     { to: "/admin/users",        icon: <FiUsers />,     label: "Users" },
   ];
 
-  const initials = user?.fullname
-    ?.split(" ").map(n => n[0]).join("").toUpperCase().slice(0, 2) || "A";
+  const initials = user?.fullName?.split(" ").map(n => n[0]).join("").toUpperCase().slice(0, 2)
+    || user?.fullname?.split(" ").map(n => n[0]).join("").toUpperCase().slice(0, 2)
+    || "A";
 
   return (
     <aside className="admin-sidebar">
@@ -52,7 +55,9 @@ function AdminSidebar() {
           >
             <span className="link-icon">{link.icon}</span>
             <span className="link-label">{link.label}</span>
-            {link.badge > 0 && <span className="sidebar-badge">{link.badge}</span>}
+            {link.badge > 0 && (
+              <span className="sidebar-badge">{link.badge}</span>
+            )}
           </NavLink>
         ))}
       </nav>
@@ -61,7 +66,7 @@ function AdminSidebar() {
         <div className="sidebar-user">
           <div className="sidebar-avatar">{initials}</div>
           <div className="sidebar-user-info">
-            <h4>{user?.fullname || "AIF Admin"}</h4>
+            <h4>{user?.fullName || user?.fullname || "AIF Admin"}</h4>
             <span>Super Admin</span>
           </div>
         </div>

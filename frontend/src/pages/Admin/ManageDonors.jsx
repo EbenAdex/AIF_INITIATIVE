@@ -5,7 +5,7 @@ import { useData } from "../../context/DataContext";
 const emptyForm = { name: "", type: "Individual", amount: "", email: "", status: "Active" };
 
 function ManageDonors() {
-  const { donors, addDonor, updateDonor, deleteDonor } = useData();
+  const { donors = [], addDonor, updateDonor, deleteDonor } = useData();
   const [showModal, setShowModal] = useState(false);
   const [editId, setEditId] = useState(null);
   const [form, setForm] = useState(emptyForm);

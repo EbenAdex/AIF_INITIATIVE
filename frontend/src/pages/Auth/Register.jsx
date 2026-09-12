@@ -31,25 +31,27 @@ function Register() {
     if (formData.password.length < 6) {
       setError("Password must be at least 6 characters."); return;
     }
-    // Password strength check — must have uppercase, lowercase, number
     if (!/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).+$/.test(formData.password)) {
-      setError("Password must contain at least one uppercase letter, one lowercase letter, and one number.");
-      return;
+      setError("Password must contain uppercase, lowercase and a number."); return;
     }
 
     setLoading(true);
     try {
-      await register({
+      const result = await register({
         fullName: formData.fullName,
         email:    formData.email,
         phone:    formData.phone,
         password: formData.password,
       });
-      navigate("/home");
+
+      // Backend requires email verification before login
+      // Redirect to verification pending page
+      navigate("/verify-email", { state: { email: formData.email } });
+
     } catch (err) {
       const msgs = err.response?.data?.error?.message;
       if (Array.isArray(msgs)) setError(msgs.join(" "));
-      else setError(err.response?.data?.message || "Registration failed. Please try again.");
+      else setError(err.response?.data?.error?.message || "Registration failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -89,25 +91,21 @@ function Register() {
           {error && <div className="auth-error">{error}</div>}
 
           <form className="auth-form" onSubmit={handleSubmit}>
-
             <div className="form-group">
               <label>Full Name</label>
               <input type="text" name="fullName" placeholder="Enter your full name"
                 value={formData.fullName} onChange={handleChange} required />
             </div>
-
             <div className="form-group">
               <label>Email Address</label>
               <input type="email" name="email" placeholder="Enter your email"
                 value={formData.email} onChange={handleChange} required />
             </div>
-
             <div className="form-group">
               <label>Phone Number</label>
               <input type="tel" name="phone" placeholder="+234 800 000 0000"
                 value={formData.phone} onChange={handleChange} required />
             </div>
-
             <div className="form-group">
               <label>Password</label>
               <div className="password-input">
@@ -120,7 +118,6 @@ function Register() {
                 </button>
               </div>
             </div>
-
             <div className="form-group">
               <label>Confirm Password</label>
               <div className="password-input">
@@ -133,7 +130,6 @@ function Register() {
                 </button>
               </div>
             </div>
-
             <button type="submit" className="auth-btn" disabled={loading}>
               {loading ? "Creating Account..." : "Create Account"}
             </button>
